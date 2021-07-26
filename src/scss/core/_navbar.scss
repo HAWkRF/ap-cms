@@ -1,0 +1,24 @@
+.navbar-ap {
+  border-bottom: 1px solid $gray-300;
+  height: 64px;
+
+  .micon {
+    margin-right: .1rem;
+    width: 1.3rem;
+    height: 1.3rem;
+
+    @include break-up(sm) {
+      margin-right: .5rem;
+      width: 1.7rem;
+      height: 1.7rem;
+    }
+
+    &__chevron-double-right {
+      background-image: str-replace($chevron-double-right, "color", $product-color-green);
+
+      &:hover {
+        background-image: str-replace($chevron-double-right, "color", $product-color-green);
+      }
+    }
+  }
+}

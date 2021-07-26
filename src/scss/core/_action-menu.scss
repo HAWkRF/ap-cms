@@ -1,0 +1,354 @@
+.action-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 1rem 0 1rem 0;
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    height: 70px;
+    text-align: center;
+    margin: 0 1rem 0 1rem;
+    cursor: pointer;
+
+    .micon {
+      height: 2.2rem;
+    }
+
+    .title {
+      height: 2rem;
+      margin-top: .3rem;
+      display: flex;
+      align-items: center;
+      color: $theme-color-second;
+    }
+
+    &:hover {
+      .title {
+        color: $theme-color-second_dark;
+      }
+    }
+  }
+}
+
+.item {
+  .micon {
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: background-image 200ms linear;
+
+    &__events_types {
+      background-image: str-replace($events-types, "color", $theme-color-second);
+    }
+
+    &__events_ratings {
+      background-image: str-replace($events-ratings, "color", $theme-color-second);
+    }
+
+    &__tickets {
+      background-image: str-replace($tickets, "color", $theme-color-second);
+    }
+
+    &__groups {
+      background-image: str-replace($groups, "color", $theme-color-second);
+    }
+
+    &__schedule {
+      background-image: str-replace($schedule, "color", $theme-color-second);
+    }
+
+    &__payments {
+      background-image: str-replace($payments, "color", $theme-color-second);
+    }
+
+    &__export {
+      background-image: str-replace($export, "color", $theme-color-second);
+    }
+
+    &__mailing {
+      background-image: str-replace($mailing, "color", $theme-color-second);
+    }
+
+    &__add-user {
+      background-image: str-replace($add-user, "color", $theme-color-second);
+    }
+
+    &__search-user {
+      background-image: str-replace($search-user, "color", $theme-color-second);
+    }
+
+    &__tournament {
+      background-image: str-replace($tournament, "color", $theme-color-second);
+    }
+
+    &__clock {
+      background-image: str-replace($clock, "color", $theme-color-second);
+    }
+
+    &__settings {
+      background-image: str-replace($settings, "color", $theme-color-second);
+    }
+
+    &__message {
+      background-image: str-replace($message, "color", $theme-color-second);
+    }
+
+    &__bar-stacked {
+      background-image: str-replace($bar-stacked, "color", $theme-color-second);
+    }
+  }
+
+  &:hover {
+    .micon {
+      &__events_types {
+        background-image: str-replace($events-types, "color", $theme-color-second_dark);
+      }
+
+      &__events_ratings {
+        background-image: str-replace($events-ratings, "color", $theme-color-second_dark);
+      }
+
+      &__tickets {
+        background-image: str-replace($tickets, "color", $theme-color-second_dark);
+      }
+
+      &__groups {
+        background-image: str-replace($groups, "color", $theme-color-second_dark);
+      }
+
+      &__schedule {
+        background-image: str-replace($schedule, "color", $theme-color-second_dark);
+      }
+
+      &__payments {
+        background-image: str-replace($payments, "color", $theme-color-second_dark);
+      }
+
+      &__export {
+        background-image: str-replace($export, "color", $theme-color-second_dark);
+      }
+
+      &__mailing {
+        background-image: str-replace($mailing, "color", $theme-color-second_dark);
+      }
+
+      &__add-user {
+        background-image: str-replace($add-user, "color", $theme-color-second_dark);
+      }
+
+      &__search-user {
+        background-image: str-replace($search-user, "color", $theme-color-second_dark);
+      }
+
+      &__tournament {
+        background-image: str-replace($tournament, "color", $theme-color-second_dark);
+      }
+
+      &__clock {
+        background-image: str-replace($clock, "color", $theme-color-second_dark);
+      }
+
+      &__settings {
+        background-image: str-replace($settings, "color", $theme-color-second_dark);
+      }
+
+      &__message {
+        background-image: str-replace($message, "color", $theme-color-second_dark);
+      }
+
+      &__bar-stacked {
+        background-image: str-replace($bar-stacked, "color", $theme-color-second_dark);
+      }
+    }
+  }
+}
+
+.micon {
+  display: block;
+  width: 1.7rem;
+  height: 1.7rem;
+  transition: background-image 200ms linear;
+
+  &__menu {
+    background-image: str-replace($menu, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($menu, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__settings {
+    background-image: str-replace($settings, "color", $gray-600);
+
+    &:hover {
+      background-image: str-replace($settings, "color", $gray-900);
+    }
+  }
+
+  &__delete {
+    background-image: str-replace($delete, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($delete, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__folder {
+    background-image: str-replace($folder, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($folder, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__pencil {
+    background-image: str-replace($pencil, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($pencil, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__list {
+    background-image: str-replace($list, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($list, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__plus {
+    background-image: str-replace($plus, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($plus, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__user {
+    background-image: str-replace($user, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($user, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__user-outline {
+    background-image: str-replace($user-outline, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($user-outline, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__chevron-right {
+    background-image: str-replace($chevron-right, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($chevron-right, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__swap-h {
+    background-image: str-replace($swap-h, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($swap-h, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__chevron-double-left {
+    background-image: str-replace($chevron-double-left, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($chevron-double-left, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__chevron-double-right {
+    background-image: str-replace($chevron-double-right, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($chevron-double-right, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__tickets {
+    background-image: str-replace($tickets, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($tickets, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__user-ap {
+    background-image: str-replace($user-ap, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($user-ap, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__users {
+    background-image: str-replace($users, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($users, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__debtors {
+    background-image: str-replace($debtors, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($debtors, "color", $theme-color-second_dark);
+    }
+  }
+
+  &__message {
+    background-image: str-replace($message, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($message, "color", $theme-color-second_dark);
+    }
+  }
+  &__tournament {
+    background-image: str-replace($tournament, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($tournament, "color", $theme-color-second_dark);
+    }
+  }
+  &__bar-stacked {
+    background-image: str-replace($bar-stacked, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($bar-stacked, "color", $theme-color-second_dark);
+    }
+  }
+  &__star {
+    background-image: str-replace($star, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($star, "color", $theme-color-second_dark);
+    }
+  }
+  &__copy {
+    background-image: str-replace($copy, "color", $theme-color-second_dark);
+
+    &:hover {
+      background-image: str-replace($copy, "color", $theme-color-second_dark);
+    }
+  }
+  // &__pencil {
+  //   background-image: str-replace($pencil, "color", $theme-color-second_dark);
+
+  //   &:hover {
+  //     background-image: str-replace($pencil, "color", $theme-color-second_dark);
+  //   }
+  // }
+}
