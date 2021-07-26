@@ -93,7 +93,7 @@ export default {
         headings: {
           id: this.$t("kb.articles.table.id"),
           title: this.$t("kb.articles.table.title"),
-          statusTitle: this.$t("kb.articles.table.status"),
+          status_title: this.$t("kb.articles.table.status"),
           actions: "",
         },
         sortable: ["id", "title", "statusTitle"],
@@ -109,7 +109,7 @@ export default {
   computed: {
     tableColumns() {
       const actions = ["actions"];
-      return ["id", "title", "statusTitle", ...actions];
+      return ["id", "title", "status_title", ...actions];
     },
   },
   methods: {
