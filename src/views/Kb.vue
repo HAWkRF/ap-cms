@@ -30,6 +30,9 @@
           <template v-slot:title="{ row }">
             {{ row.title }}
           </template>
+          <template v-slot:prev_img="{ row }">
+            <img v-if="row.img !== null" :src="imgUrl(row)"/>
+          </template>
           <template v-slot:count_canvas="{ row }">
             {{ row.count_canvas }}
           </template>
@@ -88,6 +91,8 @@ export default {
   data() {
     return {
       apiUrl: Api.baseUrl,
+      baseUrl: process.env.VUE_APP_API,
+      img_size: "?w=80&h=80",
       tableOptions: {
         perPage: 10,
         headings: {
@@ -98,7 +103,7 @@ export default {
           prev_img: this.$t("kb.articles.table.prev_img"),
           actions: "",
         },
-        sortable: ["id", "title", "status_title", "category_title"],
+        // sortable: ["id", "title", "status_title", "category_title"],
         params: {},
       },
       formModal: {
@@ -111,10 +116,13 @@ export default {
   computed: {
     tableColumns() {
       const actions = ["actions"];
-      return ["id", "title", "status_title", "category_title", ...actions];
+      return ["id", "title", "status_title", "category_title", "prev_img", ...actions];
     },
   },
   methods: {
+    imgUrl(rowItem) {
+      return this.baseUrl + rowItem.prev_img.src + this.img_size;
+    },
     searchRefresh() {
       this.$refs.searchForm.fetchFilters();
     },

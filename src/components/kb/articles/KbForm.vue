@@ -17,6 +17,7 @@
           >
           </b-form-input>
           <b-form-invalid-feedback
+            :style="{display: !!form.errors.get('title') ? 'block':'none'}"
             v-text="form.errors.get('title')"
           ></b-form-invalid-feedback>
         </b-form-group>
@@ -24,9 +25,9 @@
     </b-form-row>
     <b-form-row>
       <b-col md="6">
-        <b-form-group :label="$t('kb.articles.labels.category')" label-for="statusInput">
+        <b-form-group :label="$t('kb.articles.labels.category')" label-for="categoryInput">
           <multiselect
-            id="statusInput"
+            id="categoryInput"
             v-model="categoryIdSelect"
             track-by="id"
             label="title"
@@ -42,13 +43,203 @@
           </multiselect>
 
           <b-form-invalid-feedback
-            v-text="form.errors.get('status')"
+            :style="{display: !!form.errors.get('category_id') ? 'block':'none'}"
+            v-text="form.errors.get('category_id')"
           ></b-form-invalid-feedback>
         </b-form-group>
       </b-col>
     </b-form-row>
 
     <b-form-row>
+      <b-col md="12">
+        <b-form-group :label="$t('kb.articles.labels.prev_img')">
+          <b-form-file
+            v-model="setImg"
+            :state="true"
+            :placeholder="$t('main.load_img')"
+          ></b-form-file>
+          <b-form-invalid-feedback
+            :style="{display: !!form.errors.get('prev_img') ? 'block':'none'}"
+            v-text="form.errors.get('prev_img')"
+          ></b-form-invalid-feedback>
+        </b-form-group>
+      </b-col>
+    </b-form-row>
+
+    <b-form-row>
+      <b-col md="12">
+        <b-form-group :label="$t('kb.articles.labels.img')">
+          <b-form-file
+            v-model="setImg"
+            :state="true"
+            :placeholder="$t('main.load_img')"
+          ></b-form-file>
+          <b-form-invalid-feedback
+            :style="{display: !!form.errors.get('img') ? 'block':'none'}"
+            v-text="form.errors.get('img')"
+          ></b-form-invalid-feedback>
+        </b-form-group>
+      </b-col>
+    </b-form-row>
+
+    <b-form-row>
+      <b-col md="12">
+        <b-form-group :label="$t('kb.articles.labels.content')">
+          <editor :content="form.content" @content="setContent" />
+          <b-form-invalid-feedback
+            :style="{display: !!form.errors.get('content') ? 'block':'none'}"
+            v-text="form.errors.get('content')"
+          ></b-form-invalid-feedback>
+        </b-form-group>
+      </b-col>
+    </b-form-row>
+
+
+    <b-form-row>
+      <b-col md="12">
+        <b-form-group :label="$t('kb.articles.labels.snippet')">
+          <editor :content="form.snippet" @content="setSnippet" />
+          <b-form-invalid-feedback
+            :style="{display: !!form.errors.get('snippet') ? 'block':'none'}"
+            v-text="form.errors.get('snippet')"
+          ></b-form-invalid-feedback>
+        </b-form-group>
+      </b-col>
+    </b-form-row>
+
+
+      <div class="btn btn-link mb-3" @click="isSeoFieldsShown = !isSeoFieldsShown">Дополнительные поля для SEO</div>
+      <div v-if="isSeoFieldsShown">
+        <b-form-row>
+          <b-col md="12">
+            <b-form-group :label="$t('kb.articles.labels.seo_title')" label-for="seoTitleInput">
+              <b-form-input
+                id="seoTitleInput"
+                :state="form.isValid('seo_title')"
+                v-model="form.seo_title"
+              >
+              </b-form-input>
+              <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('seo_title') ? 'block':'none'}"
+                v-text="form.errors.get('seo_title')"
+              ></b-form-invalid-feedback>
+            </b-form-group>
+          </b-col>
+        </b-form-row>
+        <b-form-row>
+          <b-col md="12">
+            <b-form-group :label="$t('kb.articles.labels.seo_description')" label-for="seoDescriptionInput">
+              <b-form-input
+                id="seoDescriptionInput"
+                :state="form.isValid('seo_description')"
+                v-model="form.seo_description"
+              >
+              </b-form-input>
+              <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('seo_description') ? 'block':'none'}"
+                v-text="form.errors.get('seo_description')"
+              ></b-form-invalid-feedback>
+            </b-form-group>
+          </b-col>
+        </b-form-row>
+        <b-form-row>
+          <b-col md="12">
+            <b-form-group :label="$t('kb.articles.labels.og_site_name')" label-for="ogSiteNameInput">
+              <b-form-input
+                id="ogSiteNameInput"
+                :state="form.isValid('og_site_name')"
+                v-model="form.og_site_name"
+              >
+              </b-form-input>
+              <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_site_name') ? 'block':'none'}"
+                v-text="form.errors.get('og_site_name')"
+              ></b-form-invalid-feedback>
+            </b-form-group>
+          </b-col>
+        </b-form-row>
+        <b-form-row>
+          <b-col md="12">
+            <b-form-group :label="$t('kb.articles.labels.og_title')" label-for="ogTitleInput">
+              <b-form-input
+                id="ogTitleInput"
+                :state="form.isValid('og_title')"
+                v-model="form.og_title"
+              >
+              </b-form-input>
+              <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_title') ? 'block':'none'}"
+                v-text="form.errors.get('og_title')"
+              ></b-form-invalid-feedback>
+            </b-form-group>
+          </b-col>
+        </b-form-row>
+        <b-form-row>
+          <b-col md="12">
+            <b-form-group :label="$t('kb.articles.labels.og_type')" label-for="ogTypeInput">
+              <b-form-input
+                id="ogTypeInput"
+                :state="form.isValid('og_type')"
+                v-model="form.og_type"
+              >
+              </b-form-input>
+              <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_type') ? 'block':'none'}"
+                v-text="form.errors.get('og_type')"
+              ></b-form-invalid-feedback>
+            </b-form-group>
+          </b-col>
+        </b-form-row>
+        <b-form-row>
+          <b-col md="12">
+            <b-form-group :label="$t('kb.articles.labels.og_image')" label-for="ogImageInput">
+              <b-form-file
+                :state="true"
+                v-model="setImg"
+                :placeholder="$t('main.load_img')"
+              >
+              </b-form-file>
+              <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_image') ? 'block':'none'}"
+                v-text="form.errors.get('og_image')"
+              ></b-form-invalid-feedback>
+            </b-form-group>
+          </b-col>
+        </b-form-row>
+        <b-form-row>
+          <b-col md="12">
+            <b-form-group :label="$t('kb.articles.labels.og_url')" label-for="ogUrlInput">
+              <b-form-input
+                id="ogTypeInput"
+                :state="form.isValid('og_url')"
+                v-model="form.og_url"
+              >
+              </b-form-input>
+              <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_url') ? 'block':'none'}"
+                v-text="form.errors.get('og_url')"
+              ></b-form-invalid-feedback>
+            </b-form-group>
+          </b-col>
+        </b-form-row>
+        <b-form-row>
+          <b-col md="12">
+            <b-form-group :label="$t('kb.articles.labels.og_description')" label-for="ogDescriptionInput">
+              <b-form-input
+                id="ogDescriptionInput"
+                :state="form.isValid('og_description')"
+                v-model="form.og_description"
+              >
+              </b-form-input>
+              <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_description') ? 'block':'none'}"
+                v-text="form.errors.get('og_description')"
+              ></b-form-invalid-feedback>
+            </b-form-group>
+          </b-col>
+        </b-form-row>
+      </div>
+        <b-form-row>
       <b-col md="6">
         <b-form-group :label="$t('kb.articles.labels.status')" label-for="statusInput">
           <multiselect
@@ -67,153 +258,15 @@
             }}</template>
           </multiselect>
           <b-form-invalid-feedback
+            :style="{display: !!form.errors.get('status') ? 'block':'none'}"
             v-text="form.errors.get('status')"
           ></b-form-invalid-feedback>
         </b-form-group>
       </b-col>
-    </b-form-row>
-
-
-    <b-form-row>
-      <b-col md="12">
-        <b-form-group :label="$t('kb.articles.labels.prev_img')">
-          <b-form-file
-            v-model="setImg"
-            :state="true"
-            :placeholder="$t('main.load_img')"
-          ></b-form-file>
-          <b-form-invalid-feedback
-            v-text="form.errors.get('prev_img')"
-          ></b-form-invalid-feedback>
-        </b-form-group>
-      </b-col>
-    </b-form-row>
+        </b-form-row>
 
 
 
-      <div class="btn btn-link mb-3" @click="isSeoFieldsShown = !isSeoFieldsShown">Дополнительные поля для SEO</div>
-      <div v-if="isSeoFieldsShown">
-        <b-form-row>
-          <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.seo_title')" label-for="seoTitleInput">
-              <b-form-input
-                id="seoTitleInput"
-                :state="form.isValid('seo_title')"
-                v-model="form.seo_title"
-              >
-              </b-form-input>
-              <b-form-invalid-feedback
-                v-text="form.errors.get('seo_title')"
-              ></b-form-invalid-feedback>
-            </b-form-group>
-          </b-col>
-        </b-form-row>
-        <b-form-row>
-          <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.seo_description')" label-for="seoDescriptionInput">
-              <b-form-input
-                id="seoDescriptionInput"
-                :state="form.isValid('seo_description')"
-                v-model="form.seo_description"
-              >
-              </b-form-input>
-              <b-form-invalid-feedback
-                v-text="form.errors.get('seo_description')"
-              ></b-form-invalid-feedback>
-            </b-form-group>
-          </b-col>
-        </b-form-row>
-        <b-form-row>
-          <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_site_name')" label-for="ogSiteNameInput">
-              <b-form-input
-                id="ogSiteNameInput"
-                :state="form.isValid('og_site_name')"
-                v-model="form.og_site_name"
-              >
-              </b-form-input>
-              <b-form-invalid-feedback
-                v-text="form.errors.get('og_site_name')"
-              ></b-form-invalid-feedback>
-            </b-form-group>
-          </b-col>
-        </b-form-row>
-        <b-form-row>
-          <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_title')" label-for="ogTitleInput">
-              <b-form-input
-                id="ogTitleInput"
-                :state="form.isValid('og_title')"
-                v-model="form.og_title"
-              >
-              </b-form-input>
-              <b-form-invalid-feedback
-                v-text="form.errors.get('og_title')"
-              ></b-form-invalid-feedback>
-            </b-form-group>
-          </b-col>
-        </b-form-row>
-        <b-form-row>
-          <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_type')" label-for="ogTypeInput">
-              <b-form-input
-                id="ogTypeInput"
-                :state="form.isValid('og_type')"
-                v-model="form.og_type"
-              >
-              </b-form-input>
-              <b-form-invalid-feedback
-                v-text="form.errors.get('og_type')"
-              ></b-form-invalid-feedback>
-            </b-form-group>
-          </b-col>
-        </b-form-row>
-        <b-form-row>
-          <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_image')" label-for="ogImageInput">
-              <b-form-input
-                id="ogTypeInput"
-                :state="form.isValid('og_image')"
-                v-model="form.og_image"
-              >
-              </b-form-input>
-              <b-form-invalid-feedback
-                v-text="form.errors.get('og_image')"
-              ></b-form-invalid-feedback>
-            </b-form-group>
-          </b-col>
-        </b-form-row>
-        <b-form-row>
-          <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_url')" label-for="ogUrlInput">
-              <b-form-input
-                id="ogTypeInput"
-                :state="form.isValid('og_url')"
-                v-model="form.og_url"
-              >
-              </b-form-input>
-              <b-form-invalid-feedback
-                v-text="form.errors.get('og_url')"
-              ></b-form-invalid-feedback>
-            </b-form-group>
-          </b-col>
-        </b-form-row>
-        <b-form-row>
-          <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_description')" label-for="ogDescriptionInput">
-              <b-form-input
-                id="ogDescriptionInput"
-                :state="form.isValid('og_description')"
-                v-model="form.og_description"
-              >
-              </b-form-input>
-              <b-form-invalid-feedback
-                v-text="form.errors.get('og_description')"
-              ></b-form-invalid-feedback>
-            </b-form-group>
-          </b-col>
-        </b-form-row>
-      </div>
   </b-form>
 </template>
 
@@ -267,9 +320,10 @@ export default {
       form: new Form({
         id: null,
         title: "",
-        status: null,
+        status: 0,
         category_id: "",
         img: "",
+        prev_img: "",
         content: "",
         snippet: "",
         seo_title: "",

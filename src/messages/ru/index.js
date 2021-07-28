@@ -75,10 +75,20 @@ export default {
     nav: {
       profile: 'Профиль',
       users: 'Пользователи',
-      kb: 'Статьи',
-      kbCategories: 'Категории'
+      kb: 'БЗ. Статьи',
+      kbCategories: 'БЗ. Категории'
     },
 
+    load_img: 'Выбрать файл для загрузки.',
+    seo_title: "SEO title",
+    seo_discription: "SEO description",
+    seo_keywords: "SEO keywords",
+    og_site_name: "OG site name",
+    og_title: "OG title",
+    og_type: "OG type",
+    og_image: "OG image",
+    og_url: "OG url",
+    og_discription: "OG discription",
     help: 'Помощь',
     selectAll: 'Выбрать все',
     toHome: 'На главную',

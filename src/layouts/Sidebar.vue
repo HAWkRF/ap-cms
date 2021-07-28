@@ -20,6 +20,8 @@
         <span class="title">{{ $t("main.nav.users") }}</span>
       </div>
       
+      <hr />
+
        <div class="item-ap" @click="handleArticles">
         <span class="micon micon__users"></span>
         <span class="title">{{ $t("main.nav.kb") }}</span>

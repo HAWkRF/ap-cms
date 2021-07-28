@@ -36,6 +36,8 @@ export default {
     search: {
       id: 'id',
       title: 'Название статьи',
+      category_title: 'Название категории',
+      status_title: 'Статус',
     },
   },
   categories: {

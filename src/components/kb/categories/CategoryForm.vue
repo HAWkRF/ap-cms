@@ -16,6 +16,7 @@
             >
             </b-form-input>
             <b-form-invalid-feedback
+              :style="{display: !!form.errors.get('title') ? 'block':'none'}"
               v-text="form.errors.get('title')"
             ></b-form-invalid-feedback>
           </b-form-group>
@@ -23,11 +24,6 @@
       </b-form-row>
       <div class="btn btn-link mb-3" @click="isSeoFieldsShown = !isSeoFieldsShown">Дополнительные поля для SEO</div>
       <div v-if="isSeoFieldsShown">
-
-
-
-
-        
         <b-form-row>
           <b-col md="12">
             <b-form-group :label="$t('kb.categories.labels.seo_title')" label-for="seoTitleInput">
@@ -38,6 +34,7 @@
               >
               </b-form-input>
               <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('seo_title') ? 'block':'none'}"
                 v-text="form.errors.get('seo_title')"
               ></b-form-invalid-feedback>
             </b-form-group>
@@ -53,6 +50,7 @@
               >
               </b-form-input>
               <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('seo_description') ? 'block':'none'}"
                 v-text="form.errors.get('seo_description')"
               ></b-form-invalid-feedback>
             </b-form-group>
@@ -68,6 +66,7 @@
               >
               </b-form-input>
               <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_site_name') ? 'block':'none'}"
                 v-text="form.errors.get('og_site_name')"
               ></b-form-invalid-feedback>
             </b-form-group>
@@ -83,6 +82,7 @@
               >
               </b-form-input>
               <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_title') ? 'block':'none'}"
                 v-text="form.errors.get('og_title')"
               ></b-form-invalid-feedback>
             </b-form-group>
@@ -98,6 +98,7 @@
               >
               </b-form-input>
               <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_type') ? 'block':'none'}"
                 v-text="form.errors.get('og_type')"
               ></b-form-invalid-feedback>
             </b-form-group>
@@ -113,6 +114,7 @@
               >
               </b-form-input>
               <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_image') ? 'block':'none'}"
                 v-text="form.errors.get('og_image')"
               ></b-form-invalid-feedback>
             </b-form-group>
@@ -128,6 +130,7 @@
               >
               </b-form-input>
               <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_url') ? 'block':'none'}"
                 v-text="form.errors.get('og_url')"
               ></b-form-invalid-feedback>
             </b-form-group>
@@ -143,18 +146,14 @@
               >
               </b-form-input>
               <b-form-invalid-feedback
+                :style="{display: !!form.errors.get('og_description') ? 'block':'none'}"
                 v-text="form.errors.get('og_description')"
               ></b-form-invalid-feedback>
             </b-form-group>
           </b-col>
         </b-form-row>
-
-
-
-
-
       </div>
-      <b-form-row>
+        <b-form-row>
         <b-col md="6">
           <b-form-group :label="$t('kb.categories.labels.status')" label-for="statusInput">
             <multiselect
@@ -173,11 +172,12 @@
               }}</template>
             </multiselect>
             <b-form-invalid-feedback
+              :style="{display: !!form.errors.get('status') ? 'block':'none'}"
               v-text="form.errors.get('status')"
             ></b-form-invalid-feedback>
           </b-form-group>
         </b-col>
-      </b-form-row>
+        </b-form-row>
   </b-form>
 </template>
 

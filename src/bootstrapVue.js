@@ -16,6 +16,7 @@ import bPagination from 'bootstrap-vue/es/components/pagination/pagination';
 import bTable from 'bootstrap-vue/es/components/table/table';
 import bAlert from 'bootstrap-vue/es/components/alert/alert';
 import bProgress from 'bootstrap-vue/es/components/progress/progress';
+import bfromFile from 'bootstrap-vue/es/components/form-file/form-file';
 // import bPopover from 'bootstrap-vue/es/components/popover/popover';
 
 import { Navbar } from 'bootstrap-vue/es/components';
@@ -56,6 +57,7 @@ Vue.component('b-form-group', bFormGroup);
 Vue.component('b-form-radio-group', bFormRadioGroup);
 Vue.component('b-form-select', bFormSelect);
 Vue.component('b-form-textarea', bFormTextarea);
+Vue.component('b-form-file', bfromFile);
 
 Vue.component('b-progress', bProgress);
 // Vue.component('b-popover', bPopover);
