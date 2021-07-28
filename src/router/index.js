@@ -5,6 +5,7 @@ import i18n from '../i18n'
 
 import Mainpage from "../views/Mainpage";
 import Kb from '../views/Kb'
+import KbCategory from '../views/KbCategory'
 import Users from '../views/Users'
 import User from '../views/User'
 
@@ -53,6 +54,23 @@ const router = new Router({
       },
       components: {
         default: Kb,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/kbcategory',
+      name: 'kbcategory',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.clients'),
+        layout: 'simple',
+      },
+      components: {
+        default: KbCategory,
         navbar: SimpleHeader,
         footer: FooterSimple,
         sidebar: Sidebar

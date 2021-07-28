@@ -15,11 +15,19 @@
         <span class="title">{{ $t("main.nav.profile") }}</span>
       </div>
 
-      <hr />
-
       <div class="item-ap" @click="handleUsers">
         <span class="micon micon__users"></span>
         <span class="title">{{ $t("main.nav.users") }}</span>
+      </div>
+      
+       <div class="item-ap" @click="handleArticles">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.kb") }}</span>
+      </div>
+
+       <div class="item-ap" @click="handleCategories">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.kbCategories") }}</span>
       </div>
 
       <hr />
@@ -59,6 +67,14 @@ export default {
     },
     handleUsers() {
       this.$router.push({ name: "users" });
+      this.collapsedCondition();
+    },
+    handleArticles() {
+      this.$router.push({ name: "kb" });
+      this.collapsedCondition();
+    },
+    handleCategories() {
+      this.$router.push({ name: "kbcategory" });
       this.collapsedCondition();
     },
     collapsedCondition() {

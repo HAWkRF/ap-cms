@@ -75,18 +75,8 @@ export default {
     nav: {
       profile: 'Профиль',
       users: 'Пользователи',
-      tickets: 'Абонементы',
-      debtors: 'Должники',
-      groups: 'Группы',
-      schedule: 'Расписание',
-      payments: 'Поступления',
-      export: 'Экспорт',
-      mailing: 'Рассылки',
-      add: 'Добавить',
-      search: 'Найти',
-      events: 'Мероприятия',
-      scheduler: 'Планировщик',
-      settings: 'Настройки',
+      kb: 'Статьи',
+      kbCategories: 'Категории'
     },
 
     help: 'Помощь',

@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row-ap">
       <div class="col-12">
-        <h1>{{ $t("kb.articles.title") }}</h1>
+        <h1>{{ $t("kb.categories.title") }}</h1>
 
         <div class="search-form">
           <b-row>
@@ -15,7 +15,7 @@
               </b-button>
             </b-col>
             <b-col order-md="1" col>
-              <kb-search ref="searchForm" @search="search"> </kb-search>
+              <category-search ref="searchForm" @search="search"> </category-search>
             </b-col>
           </b-row>
         </div>
@@ -55,13 +55,13 @@
           @ok="handleSave"
           @hidden="resetForm"
         >
-          <kb-form
-            ref="kbForm"
+          <category-form
+            ref="CategoryForm"
             :internalId="formModal.id"
             @updated="updated"
             @created="created"
           >
-          </kb-form>
+          </category-form>
         </b-modal>
       </div>
     </div>
@@ -72,16 +72,16 @@
 import tableRefreshMixin from "@/mixins/table";
 import notificationMixin from "@/mixins/notification";
 import filtersMixin from "@/mixins/filters";
-import Api from "@/api/v1/kb";
-import KbSearch from "@/components/kb/articles/KbSearch";
-import KbForm from "@/components/kb/articles/KbForm";
+import Api from "@/api/v1/kbcategories";
+import CategorySearch from "@/components/kb/categories/CategorySearch"
+import CategoryForm from "@/components/kb/categories/CategoryForm";
 import TableActionButtons from "@/components/TableActionButtons";
 
 export default {
-  name: "kb",
+  name: "kbcategory",
   components: {
-    KbForm,
-    KbSearch,
+    CategoryForm,
+    CategorySearch,
     TableActionButtons,
   },
   mixins: [notificationMixin, tableRefreshMixin, filtersMixin],
@@ -91,14 +91,12 @@ export default {
       tableOptions: {
         perPage: 10,
         headings: {
-          id: this.$t("kb.articles.table.id"),
-          title: this.$t("kb.articles.table.title"),
-          status_title: this.$t("kb.articles.table.status"),
-          category_title: this.$t("kb.articles.table.category"),
-          prev_img: this.$t("kb.articles.table.prev_img"),
+          id: this.$t("kb.categories.table.id"),
+          title: this.$t("kb.categories.table.title"),
+          status_title: this.$t("kb.categories.table.status"),
           actions: "",
         },
-        sortable: ["id", "title", "status_title", "category_title"],
+        sortable: ["id", "title", "status_title"],
         params: {},
       },
       formModal: {
@@ -111,7 +109,7 @@ export default {
   computed: {
     tableColumns() {
       const actions = ["actions"];
-      return ["id", "title", "status_title", "category_title", ...actions];
+      return ["id", "title", "status_title", ...actions];
     },
   },
   methods: {
@@ -136,7 +134,7 @@ export default {
     },
     handleSave(event) {
       event.preventDefault();
-      this.$refs.kbForm.submit();
+      this.$refs.CategoryForm.submit();
     },
     resetForm() {
       this.formModal.id = null;
@@ -171,3 +169,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+</style>

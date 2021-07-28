@@ -6,96 +6,31 @@
     @reset="reset"
   >
     <loading :active="loading" :is-full-page="false"> </loading>
-
-    <b-form-row>
-      <b-col md="12">
-        <b-form-group :label="$t('kb.articles.labels.title')" label-for="titleInput">
-          <b-form-input
-            id="titleInput"
-            :state="form.isValid('title')"
-            v-model="form.title"
-          >
-          </b-form-input>
-          <b-form-invalid-feedback
-            v-text="form.errors.get('title')"
-          ></b-form-invalid-feedback>
-        </b-form-group>
-      </b-col>
-    </b-form-row>
-    <b-form-row>
-      <b-col md="6">
-        <b-form-group :label="$t('kb.articles.labels.category')" label-for="statusInput">
-          <multiselect
-            id="statusInput"
-            v-model="categoryIdSelect"
-            track-by="id"
-            label="title"
-            :placeholder="$t('main.pickAValue')"
-            :options="categories"
-            :searchable="false"
-            :allow-empty="false"
-            v-bind="selectOptions"
-          >
-            <template slot="singleLabel" slot-scope="{ option }">{{
-              option.title
-            }}</template>
-          </multiselect>
-
-          <b-form-invalid-feedback
-            v-text="form.errors.get('status')"
-          ></b-form-invalid-feedback>
-        </b-form-group>
-      </b-col>
-    </b-form-row>
-
-    <b-form-row>
-      <b-col md="6">
-        <b-form-group :label="$t('kb.articles.labels.status')" label-for="statusInput">
-          <multiselect
-            id="statusInput"
-            v-model="statusIdSelect"
-            track-by="id"
-            label="title"
-            :placeholder="$t('main.pickAValue')"
-            :options="statuses"
-            :searchable="false"
-            :allow-empty="false"
-            v-bind="selectOptions"
-          >
-            <template slot="singleLabel" slot-scope="{ option }">{{
-              option.title
-            }}</template>
-          </multiselect>
-          <b-form-invalid-feedback
-            v-text="form.errors.get('status')"
-          ></b-form-invalid-feedback>
-        </b-form-group>
-      </b-col>
-    </b-form-row>
-    
-
-    <b-form-row>
-      <b-col md="12">
-        <b-form-group :label="$t('kb.articles.labels.prev_img')">
-          <b-form-file
-            v-model="setImg"
-            :state="true"
-            :placeholder="$t('main.load_img')"
-          ></b-form-file>
-          <b-form-invalid-feedback
-            v-text="form.errors.get('prev_img')"
-          ></b-form-invalid-feedback>
-        </b-form-group>
-      </b-col>
-    </b-form-row>
-
-
-
+      <b-form-row>
+        <b-col md="12">
+          <b-form-group :label="$t('kb.categories.labels.title')" label-for="titleInput">
+            <b-form-input
+              id="titleInput"
+              :state="form.isValid('title')"
+              v-model="form.title"
+            >
+            </b-form-input>
+            <b-form-invalid-feedback
+              v-text="form.errors.get('title')"
+            ></b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+      </b-form-row>
       <div class="btn btn-link mb-3" @click="isSeoFieldsShown = !isSeoFieldsShown">Дополнительные поля для SEO</div>
       <div v-if="isSeoFieldsShown">
+
+
+
+
+        
         <b-form-row>
           <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.seo_title')" label-for="seoTitleInput">
+            <b-form-group :label="$t('kb.categories.labels.seo_title')" label-for="seoTitleInput">
               <b-form-input
                 id="seoTitleInput"
                 :state="form.isValid('seo_title')"
@@ -110,7 +45,7 @@
         </b-form-row>
         <b-form-row>
           <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.seo_description')" label-for="seoDescriptionInput">
+            <b-form-group :label="$t('kb.categories.labels.seo_description')" label-for="seoDescriptionInput">
               <b-form-input
                 id="seoDescriptionInput"
                 :state="form.isValid('seo_description')"
@@ -125,7 +60,7 @@
         </b-form-row>
         <b-form-row>
           <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_site_name')" label-for="ogSiteNameInput">
+            <b-form-group :label="$t('kb.categories.labels.og_site_name')" label-for="ogSiteNameInput">
               <b-form-input
                 id="ogSiteNameInput"
                 :state="form.isValid('og_site_name')"
@@ -140,7 +75,7 @@
         </b-form-row>
         <b-form-row>
           <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_title')" label-for="ogTitleInput">
+            <b-form-group :label="$t('kb.categories.labels.og_title')" label-for="ogTitleInput">
               <b-form-input
                 id="ogTitleInput"
                 :state="form.isValid('og_title')"
@@ -155,7 +90,7 @@
         </b-form-row>
         <b-form-row>
           <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_type')" label-for="ogTypeInput">
+            <b-form-group :label="$t('kb.categories.labels.og_type')" label-for="ogTypeInput">
               <b-form-input
                 id="ogTypeInput"
                 :state="form.isValid('og_type')"
@@ -170,7 +105,7 @@
         </b-form-row>
         <b-form-row>
           <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_image')" label-for="ogImageInput">
+            <b-form-group :label="$t('kb.categories.labels.og_image')" label-for="ogImageInput">
               <b-form-input
                 id="ogTypeInput"
                 :state="form.isValid('og_image')"
@@ -185,7 +120,7 @@
         </b-form-row>
         <b-form-row>
           <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_url')" label-for="ogUrlInput">
+            <b-form-group :label="$t('kb.categories.labels.og_url')" label-for="ogUrlInput">
               <b-form-input
                 id="ogTypeInput"
                 :state="form.isValid('og_url')"
@@ -200,7 +135,7 @@
         </b-form-row>
         <b-form-row>
           <b-col md="12">
-            <b-form-group :label="$t('kb.articles.labels.og_description')" label-for="ogDescriptionInput">
+            <b-form-group :label="$t('kb.categories.labels.og_description')" label-for="ogDescriptionInput">
               <b-form-input
                 id="ogDescriptionInput"
                 :state="form.isValid('og_description')"
@@ -213,15 +148,43 @@
             </b-form-group>
           </b-col>
         </b-form-row>
+
+
+
+
+
       </div>
+      <b-form-row>
+        <b-col md="6">
+          <b-form-group :label="$t('kb.categories.labels.status')" label-for="statusInput">
+            <multiselect
+              id="statusInput"
+              v-model="statusIdSelect"
+              track-by="id"
+              label="title"
+              :placeholder="$t('main.pickAValue')"
+              :options="statuses"
+              :searchable="false"
+              :allow-empty="false"
+              v-bind="selectOptions"
+            >
+              <template slot="singleLabel" slot-scope="{ option }">{{
+                option.title
+              }}</template>
+            </multiselect>
+            <b-form-invalid-feedback
+              v-text="form.errors.get('status')"
+            ></b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+      </b-form-row>
   </b-form>
 </template>
 
 <script>
 import Form from "@/utils/Form";
-import Api from "@/api/v1/kb";
+import Api from "@/api/v1/kbcategories";
 import Multiselect from "vue-multiselect";
-import editor from "@/components/editor";
 
 export default {
   props: {
@@ -231,17 +194,11 @@ export default {
   },
   components: {
     Multiselect,
-    editor,
   },
   watch: {
     statusIdSelect(value) {
       if (value !== undefined) {
         this.form.status = value.id;
-      }
-    },
-    categoryIdSelect(value) {
-      if (value !== undefined) {
-        this.form.category_id = value.id;
       }
     },
   },
@@ -251,9 +208,7 @@ export default {
       isSeoFieldsShown: false,
 
       statuses: [],
-      categories: [],
       statusIdSelect: null,
-      categoryIdSelect: null,
 
       selectOptions: {
         multiple: false,
@@ -268,10 +223,7 @@ export default {
         id: null,
         title: "",
         status: null,
-        category_id: "",
-        img: "",
-        content: "",
-        snippet: "",
+        category: "",
         seo_title: "",
         seo_description: "",
         og_site_name: "",
@@ -284,28 +236,18 @@ export default {
     };
   },
   methods: {
-    setImg(content) {
-      (this.Form.img = content), (this.form.img = content.src);
-    },
-    setContent(content) {
-      this.form.content = content;
-    },
-    setSnippet(content) {
-      this.form.snippet = content;
-    },
     async load(id) {
       const response = await Api.getModel(id);
       this.form.load(response.data);
       this.form.id = id;
 
+      
       this.statusIdSelect = this.statuses.find((x) => x.id === this.form.status);
 
-      this.categoryIdSelect = this.categories.find((x) => x.id === this.form.category_id);
     },
     async loadFilters() {
       const response = await Api.getFilters();
       this.statuses = response.data.statuses;
-      this.categories = response.data.categories;
     },
     async submit() {
       try {
@@ -320,6 +262,12 @@ export default {
       } catch (error) {
         this.form.onFail(error.response.data);
       }
+    },
+    setImg(content) {
+      (this.Form.img = content), (this.form.img = content.src);
+    },
+    setContent(content) {
+      this.form.content = content;
     },
     reset() {
       this.form.reset();
