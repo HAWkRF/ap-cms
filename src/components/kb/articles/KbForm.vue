@@ -72,7 +72,7 @@
         </b-form-group>
       </b-col>
     </b-form-row>
-    
+
 
     <b-form-row>
       <b-col md="12">
