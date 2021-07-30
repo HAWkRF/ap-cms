@@ -2,45 +2,46 @@
   <div class="container-fluid">
     <div class="row-ap">
       <div class="col-12">
-        <h1>{{ $t("kb.articles.title") }}</h1>
-          <div class="search-form">
-            <b-row>
-              <b-col order-lg="2" lg="auto">
-                <b-button
+        <h1>{{ $t("vacancy.page_title") }}</h1>
+        <div class="search-form">
+          <b-row>
+            <b-col order-lg="2" lg="auto">
+              <b-button
                 @click="openCreateModal"
-                v-text="$t('kb.create')"
+                v-text="$t('vacancy.create')"
                 block
               >
-                </b-button>
-              </b-col>
+              </b-button>
+            </b-col>
             <b-col order-md="1" col>
-              <kb-search ref="searchForm" @search="search"> </kb-search>
+              <vacancy-search ref="searchForm" @search="search">
+              </vacancy-search>
             </b-col>
           </b-row>
         </div>
 
         <v-server-table
-          ref="kbArticlesTable"
+          ref="vacancyTable"
           :url="apiUrl"
           :columns="tableColumns"
           :options="tableOptions"
           @row-click="handleView"
         >
-          <template v-slot:title="{ row }">
-            {{ row.title }}
-          </template>
-          <template v-slot:prev_img="{ row }">
+          <template v-slot:img="{ row }">
             <img v-if="row.img !== null" :src="imgUrl(row)"/>
           </template>
-          <template v-slot:count_canvas="{ row }">
-            {{ row.count_canvas }}
+          <template v-slot:type="{ row }">
+            {{ row.typeTitle }}
+          </template>
+          <template v-slot:status="{ row }">
+            {{ row.statusTitle }}
           </template>
           <template v-slot:actions="{ row }">
             <table-action-buttons
               :update-visible="true"
               :delete-visible="true"
-              @update="openUpdateModal(row.id)"
-              @delete="handleDelete(row.id)"
+              @update="openUpdateModal(row)"
+              @delete="handleDelete(row.id, row.title)"
             >
             </table-action-buttons>
           </template>
@@ -49,21 +50,21 @@
         <b-modal
           lazy
           v-model="formModal.show"
-          modal-class="modal-right"
-          size="lg"
+          modal-class="modal-left"
+          size="sm"
           :title="formModal.title"
           :okTitle="$t('main.save')"
           :cancelTitle="$t('main.cancel')"
           @ok="handleSave"
           @hidden="resetForm"
         >
-          <kb-form
-            ref="kbForm"
+          <vacancy-form
+            ref="vacancyForm"
             :internalId="formModal.id"
             @updated="updated"
             @created="created"
           >
-          </kb-form>
+          </vacancy-form>
         </b-modal>
       </div>
     </div>
@@ -74,35 +75,41 @@
 import tableRefreshMixin from "@/mixins/table";
 import notificationMixin from "@/mixins/notification";
 import filtersMixin from "@/mixins/filters";
-import Api from "@/api/v1/kb";
-import KbSearch from "@/components/kb/articles/KbSearch";
-import KbForm from "@/components/kb/articles/KbForm";
+import Api from "@/api/v1/vacancy";
+import VacancySearch from "@/components/vacancy/VacancySearch";
+import VacancyForm from "@/components/vacancy/VacancyForm";
 import TableActionButtons from "@/components/TableActionButtons";
 
 export default {
-  name: "kb",
+  name: "vacancy",
   components: {
-    KbForm,
-    KbSearch,
+    VacancyForm,
+    VacancySearch,
     TableActionButtons,
   },
   mixins: [notificationMixin, tableRefreshMixin, filtersMixin],
   data() {
     return {
-      apiUrl: Api.baseUrl,
       baseUrl: process.env.VUE_APP_API,
+      apiUrl: Api.baseUrl,
       img_size: "?w=80&h=80",
       tableOptions: {
         perPage: 10,
         headings: {
-          id: this.$t("kb.articles.table.id"),
-          title: this.$t("kb.articles.table.title"),
-          status_title: this.$t("kb.articles.table.status"),
-          category_title: this.$t("kb.articles.table.category"),
-          prev_img: this.$t("kb.articles.table.prev_img"),
+          id: this.$t("vacancy.id"),
+          title: this.$t("vacancy.title"),
+          img: this.$t("vacancy.img"),
+          status: this.$t("vacancy.status"),
           actions: "",
         },
-        // sortable: ["id", "title", "status_title", "category_title"],
+        sortable: ["id", "title", "status"],
+        columnsClasses: {
+          id: "id",
+          actions: "actions",
+          img: "img",
+          header_img: "header_img",
+          status: "status",
+        },
         params: {},
       },
       formModal: {
@@ -115,12 +122,12 @@ export default {
   computed: {
     tableColumns() {
       const actions = ["actions"];
-      return ["id", "title", "status_title", "category_title", "prev_img", ...actions];
+      return ["id", "title", "img", "status", ...actions];
     },
   },
   methods: {
     imgUrl(rowItem) {
-      return this.baseUrl + rowItem.prev_img.src + this.img_size;
+      return this.baseUrl + rowItem.img.src + this.img_size;
     },
     searchRefresh() {
       this.$refs.searchForm.fetchFilters();
@@ -130,27 +137,29 @@ export default {
       this.$_table_debouncedRefresh();
     },
     refreshTable() {
-      this.$refs.kbArticlesTable.getData();
+      this.$refs.vacancyTable.getData();
     },
     openCreateModal() {
       this.formModal.show = true;
-      this.formModal.title = this.$t("kb.create");
+      this.formModal.title = this.$t("vacancy.create");
     },
-    openUpdateModal(id) {
-      this.formModal.id = id;
+    openUpdateModal(row) {
+      this.formModal.id = row.id;
       this.formModal.show = true;
-      this.formModal.title = this.$t("kb.update");
+      this.formModal.title = this.$t("vacancy.update");
     },
     handleSave(event) {
       event.preventDefault();
-      this.$refs.kbForm.submit();
+      this.$refs.vacancyForm.submit();
     },
     resetForm() {
       this.formModal.id = null;
     },
-    async handleDelete(id) {
+    async handleDelete(id, name) {
       const result = await this.$_notification_confirmDelete(
-        this.$t("main.confirm.delete")
+        this.$t("main.confirm.delete"),
+        this.$t("vacancy.to_delete"),
+        name
       );
       if (result.value) {
         await Api.deleteModel(id);
@@ -173,7 +182,7 @@ export default {
       this.refreshTable();
     },
     handleView({ row }) {
-      this.openUpdateModal(row.id);
+      this.openUpdateModal(row);
     },
   },
 };

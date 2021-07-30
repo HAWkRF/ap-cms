@@ -33,6 +33,11 @@
       </div>
 
       <hr />
+      <div class="item-ap" @click="handleVacancies">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.vacancy") }}</span>
+      </div>
+
     </div>
   </div>
 </template>
@@ -77,6 +82,10 @@ export default {
     },
     handleCategories() {
       this.$router.push({ name: "kbcategory" });
+      this.collapsedCondition();
+    },
+    handleVacancies() {
+      this.$router.push({ name: "vacancy" });
       this.collapsedCondition();
     },
     collapsedCondition() {

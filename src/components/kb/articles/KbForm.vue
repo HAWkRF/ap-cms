@@ -33,7 +33,7 @@
             label="title"
             :placeholder="$t('main.pickAValue')"
             :options="categories"
-            :searchable="false"
+            :searchable="true"
             :allow-empty="false"
             v-bind="selectOptions"
           >
@@ -42,7 +42,7 @@
             }}</template>
           </multiselect>
 
-          <b-form-invalid-feedback
+          <b-form-invalid-feedback 
             :style="{display: !!form.errors.get('category_id') ? 'block':'none'}"
             v-text="form.errors.get('category_id')"
           ></b-form-invalid-feedback>

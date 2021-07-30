@@ -8,6 +8,7 @@ import Kb from '../views/Kb'
 import KbCategory from '../views/KbCategory'
 import Users from '../views/Users'
 import User from '../views/User'
+import Vacancy from '../views/Vacancy'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -49,7 +50,7 @@ const router = new Router({
       meta: {
         requiresAuth: true,
         onlyWorker: true,
-        title: i18n.t('main.meta.clients'),
+        title: i18n.t('main.meta.articles'),
         layout: 'simple',
       },
       components: {
@@ -66,11 +67,28 @@ const router = new Router({
       meta: {
         requiresAuth: true,
         onlyWorker: true,
-        title: i18n.t('main.meta.clients'),
+        title: i18n.t('main.meta.categories'),
         layout: 'simple',
       },
       components: {
         default: KbCategory,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/vacancy',
+      name: 'vacancy',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.vacancies'),
+        layout: 'simple',
+      },
+      components: {
+        default: Vacancy,
         navbar: SimpleHeader,
         footer: FooterSimple,
         sidebar: Sidebar

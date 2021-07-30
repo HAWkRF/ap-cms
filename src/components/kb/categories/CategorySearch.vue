@@ -1,7 +1,7 @@
 <template>
   <b-form>
     <b-form-row>
-      <b-col>
+      <b-col md="1">
         <b-form-group>
           <b-form-input
             v-model="search.id"
@@ -10,7 +10,7 @@
           </b-form-input>
         </b-form-group>
       </b-col>
-      <b-col>
+      <b-col md="8">
         <b-form-group>
           <b-form-input
             v-model="search.title"
