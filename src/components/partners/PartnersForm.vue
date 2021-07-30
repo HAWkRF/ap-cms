@@ -6,16 +6,17 @@
     @reset="reset"
   >
     <loading :active="loading" :is-full-page="false"> </loading>
+
     <b-form-row>
       <b-col md="12">
         <b-form-group
-          :label="$t('vacancy.labels.title')"
+          :label="$t('partners.labels.title')"
           label-for="titleInput"
         >
           <b-form-input :state="form.isValid('title')" v-model="form.title">
           </b-form-input>
           <b-form-invalid-feedback
-            :style="{display: !!form.errors.get('content') ? 'block':'none'}"
+            :style="{display: !!form.errors.get('title') ? 'block':'none'}"
             v-text="form.errors.get('title')"
           ></b-form-invalid-feedback>
         </b-form-group>
@@ -24,27 +25,36 @@
 
     <b-form-row>
       <b-col md="12">
-        <b-form-group :label="$t('vacancy.labels.content')">
+        <b-form-group :label="$t('partners.labels.content')">
           <editor :content="form.content" @content="setContent" />
           <b-form-invalid-feedback
-            :style="{display: !!form.errors.get('content') ? 'block':'none'}"
+          :style="{display: !!form.errors.get('content') ? 'block':'none'}"
             v-text="form.errors.get('content')"
           ></b-form-invalid-feedback>
         </b-form-group>
       </b-col>
     </b-form-row>
 
-      <b-form-row>
+    <b-form-row>
       <b-col md="12">
-        <b-form-group :label="$t('kb.articles.labels.img')">
-          <b-form-file
-            v-model="setImg"
-            :state="true"
-            :placeholder="$t('main.load_img')"
-          ></b-form-file>
+        <b-form-group :label="$t('partners.labels.type')" label-for="typeInput">
+          <multiselect
+            v-model="typeSelect"
+            track-by="id"
+            label="title"
+            :placeholder="$t('main.pickAValue')"
+            :options="types"
+            :searchable="false"
+            :allow-empty="false"
+            v-bind="selectOptions"
+          >
+            <template slot="singleLabel" slot-scope="{ option }">{{
+              option.title
+            }}</template>
+          </multiselect>
           <b-form-invalid-feedback
-            :style="{display: !!form.errors.get('img') ? 'block':'none'}"
-            v-text="form.errors.get('img')"
+          :style="{display: !!form.errors.get('type') ? 'block':'none'}"
+            v-text="form.errors.get('type')"
           ></b-form-invalid-feedback>
         </b-form-group>
       </b-col>
@@ -53,15 +63,10 @@
     <b-form-row>
       <b-col md="12">
         <b-form-group
-          :label="$t('vacancy.labels.order')"
+          :label="$t('partners.labels.order')"
           label-for="orderInput"
         >
-          <b-form-input
-            type="number"
-            min="0"
-            :state="form.isValid('order')"
-            v-model="form.order"
-          >
+          <b-form-input type="number" min="0" :state="form.isValid('order')" v-model="form.sort">
           </b-form-input>
           <b-form-invalid-feedback
             :style="{display: !!form.errors.get('order') ? 'block':'none'}"
@@ -74,7 +79,7 @@
     <b-form-row>
       <b-col md="12">
         <b-form-group
-          :label="$t('vacancy.labels.status')"
+          :label="$t('partners.labels.status')"
           label-for="statusInput"
         >
           <multiselect
@@ -103,7 +108,7 @@
 
 <script>
 import Form from "@/utils/Form";
-import Api from "@/api/v1/vacancy";
+import Api from "@/api/v1/partners";
 import Multiselect from "vue-multiselect";
 import editor from "@/components/editor";
 
@@ -117,11 +122,12 @@ export default {
       default: null,
     },
   },
-  data: function() {
+  data: function () {
     return {
       loading: false,
-
       statuses: [],
+      types: [],
+      typeSelect: null,
       statusSelect: null,
       selectOptions: {
         multiple: false,
@@ -138,7 +144,8 @@ export default {
         title: "",
         content: "",
         img: "",
-        order: "",
+        type: "",
+        sort: null,
         status: "",
       }),
     };
@@ -149,6 +156,11 @@ export default {
         this.form.status = newValue.id;
       }
     },
+    typeSelect(newValue) {
+      if (newValue !== undefined) {
+        this.form.type = newValue.id;
+      }
+    },
   },
   methods: {
     setContent(content) {
@@ -157,6 +169,9 @@ export default {
     async load(id) {
       const response = await Api.getModel(id);
       this.form.load(response.data);
+      this.typeSelect = this.types.find(
+        (x) => String(x.id) === String(this.form.type)
+      );
       this.statusSelect = this.statuses.find(
         (x) => String(x.id) === String(this.form.status)
       );
@@ -164,6 +179,7 @@ export default {
     async filtersLoad() {
       const response = await Api.getFilters();
       this.statuses = response.data.statuses;
+      this.types = response.data.types;
     },
     async submit() {
       try {
@@ -190,9 +206,11 @@ export default {
       await this.load(this.internalId);
     } else {
       this.isNewForm = true;
-            this.statusSelect = this.statuses[0];
+      this.statusSelect = this.statuses[0];
+      this.typeSelect = this.types[0];
     }
     this.loading = false;
   },
 };
 </script>
+     

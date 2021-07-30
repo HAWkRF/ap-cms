@@ -9,6 +9,7 @@ import KbCategory from '../views/KbCategory'
 import Users from '../views/Users'
 import User from '../views/User'
 import Vacancy from '../views/Vacancy'
+import Partners from '../views/Partners'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -94,6 +95,24 @@ const router = new Router({
         sidebar: Sidebar
       },
     },
+
+    {
+      path: '/partners',
+      name: 'partners',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.partners'),
+        layout: 'simple',
+      },
+      components: {
+        default: Partners,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
 
     {
       path: '/users',

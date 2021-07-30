@@ -38,6 +38,11 @@
         <span class="title">{{ $t("main.nav.vacancy") }}</span>
       </div>
 
+        <div class="item-ap" @click="handlePartners">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.partners") }}</span>
+      </div>
+
     </div>
   </div>
 </template>
@@ -86,6 +91,10 @@ export default {
     },
     handleVacancies() {
       this.$router.push({ name: "vacancy" });
+      this.collapsedCondition();
+    },
+    handlePartners() {
+      this.$router.push({ name: "partners" });
       this.collapsedCondition();
     },
     collapsedCondition() {

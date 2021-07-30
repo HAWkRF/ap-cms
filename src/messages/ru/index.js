@@ -2,6 +2,7 @@ import users from './users.js'
 import kb from './kb.js'
 import places from './places.js'
 import vacancy from './vacancy'
+import partners from './partners'
 
 let systemName = 'AkratoPRIME CMS';
 
@@ -10,6 +11,7 @@ export default {
   kb,
   places,
   vacancy,
+  partners,
 
   selected: {
     allPages: 'Все страницы',
@@ -80,6 +82,7 @@ export default {
       kb: 'БЗ. Статьи',
       kbCategories: 'БЗ. Категории',
       vacancy: 'Вакансии',
+      partners: 'Партнеры',
     },
 
     load_img: 'Выбрать файл для загрузки.',
@@ -129,6 +132,7 @@ export default {
       articles: 'БЗ. Статьи',
       categories: 'БЗ. Категории',
       vacancy: 'Вакансии',
+      partners: 'Партнеры',
       client: 'Профиль',
       login: 'Вход',
       forgot: 'Забыли пароль',
