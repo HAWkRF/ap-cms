@@ -50,8 +50,8 @@
         <b-modal
           lazy
           v-model="formModal.show"
-          modal-class="modal-left"
-          size="sm"
+          modal-class="modal-right"
+          size="lg"
           :title="formModal.title"
           :okTitle="$t('main.save')"
           :cancelTitle="$t('main.cancel')"

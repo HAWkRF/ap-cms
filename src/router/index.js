@@ -10,6 +10,7 @@ import Users from '../views/Users'
 import User from '../views/User'
 import Vacancy from '../views/Vacancy'
 import Partners from '../views/Partners'
+import Employees from '../views/Employees'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -107,6 +108,23 @@ const router = new Router({
       },
       components: {
         default: Partners,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/employees',
+      name: 'employees',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.employees'),
+        layout: 'simple',
+      },
+      components: {
+        default: Employees,
         navbar: SimpleHeader,
         footer: FooterSimple,
         sidebar: Sidebar
