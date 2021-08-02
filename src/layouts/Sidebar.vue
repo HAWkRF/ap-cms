@@ -57,6 +57,11 @@
         <span class="micon micon__users"></span>
         <span class="title">{{ $t("main.nav.categoriesGoods") }}</span>
       </div>
+      <hr />
+        <div class="item-ap" @click="handleMainNews">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.mainNews") }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -121,6 +126,10 @@ export default {
     },
     handleCategories() {
       this.$router.push({ name: "categories" });
+      this.collapsedCondition();
+    },
+    handleMainNews() {
+      this.$router.push({ name: "main-news" });
       this.collapsedCondition();
     },
     collapsedCondition() {

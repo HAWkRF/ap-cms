@@ -2,49 +2,45 @@
   <div class="container-fluid">
     <div class="row-ap">
       <div class="col-12">
-        <h1>{{ $t("categoriesGoods.page_title") }}</h1>
-        <div class="search-form">
-          <b-row>
-            <b-col order-lg="2" lg="auto">
-              <b-button
+        <h1>{{ $t("mainNews.page_title") }}</h1>
+          <div class="search-form">
+            <b-row>
+              <b-col order-lg="2" lg="auto">
+                <b-button
                 @click="openCreateModal"
-                v-text="$t('categoriesGoods.create')"
+                v-text="$t('mainNews.create')"
                 block
               >
-              </b-button>
-            </b-col>
+                </b-button>
+              </b-col>
             <b-col order-md="1" col>
-              <settings-search ref="searchForm" @search="search">
-              </settings-search>
+              <kb-search ref="searchForm" @search="search"> </kb-search>
             </b-col>
           </b-row>
         </div>
 
         <v-server-table
-          ref="categoriesGoodsTable"
+          ref="mainNewsTable"
           :url="apiUrl"
           :columns="tableColumns"
           :options="tableOptions"
           @row-click="handleView"
         >
-          <template v-slot:prev_img="{ row }">
-            <img :src="baseUrl + row.prev_img.src + img_size"/>
+          <template v-slot:title="{ row }">
+            {{ row.title }}
           </template>
-          <template v-slot:parent_id="{ row }">
-            {{ row.parentTitle }}
+          <template v-slot:img="{ row }">
+            <img v-if="row.img !== null" :src="imgUrl(row)"/>
           </template>
-          <template v-slot:type="{ row }">
-            {{ row.typeTitle }}
-          </template>
-          <template v-slot:status="{ row }">
-            {{ row.statusTitle }}
+          <template v-slot:count_canvas="{ row }">
+            {{ row.count_canvas }}
           </template>
           <template v-slot:actions="{ row }">
             <table-action-buttons
               :update-visible="true"
               :delete-visible="true"
-              @update="openUpdateModal(row)"
-              @delete="handleDelete(row.id, row.title)"
+              @update="openUpdateModal(row.id)"
+              @delete="handleDelete(row.id)"
             >
             </table-action-buttons>
           </template>
@@ -61,13 +57,13 @@
           @ok="handleSave"
           @hidden="resetForm"
         >
-          <settings-form
-            ref="settingsSiteForm"
+          <kb-form
+            ref="mainNewsForm"
             :internalId="formModal.id"
             @updated="updated"
             @created="created"
           >
-          </settings-form>
+          </kb-form>
         </b-modal>
       </div>
     </div>
@@ -78,42 +74,32 @@
 import tableRefreshMixin from "@/mixins/table";
 import notificationMixin from "@/mixins/notification";
 import filtersMixin from "@/mixins/filters";
-import Api from "@/api/v1/categories-goods";
-// import SettingsSearch from "@/components/settings/SettingsSearch";
-// import SettingsForm from "@/components/settings/SettingsForm";
+import Api from "@/api/v1/main-news";
+import MainNewsSearch from '@/components/main-news/MainNewsSearch';
+// import KbForm from "@/components/kb/articles/KbForm";
 import TableActionButtons from "@/components/TableActionButtons";
 
 export default {
-  name: "categories-goods",
   components: {
-    // SettingsForm,
-    // SettingsSearch,
+    MainNewsSearch,
     TableActionButtons,
   },
   mixins: [notificationMixin, tableRefreshMixin, filtersMixin],
   data() {
     return {
-      statuses: [],
-      baseUrl: process.env.VUE_APP_API,
       apiUrl: Api.baseUrl,
+      baseUrl: process.env.VUE_APP_API,
       img_size: "?w=80&h=80",
       tableOptions: {
         perPage: 10,
         headings: {
-          id: this.$t("settingsSite.table.id"),
-          title: this.$t("settingsSite.table.title"),
-          parent_id: this.$t("categoriesGoods.table.parent_title"),
-          img: this.$t("categoriesGoods.table.img"),
-          status: this.$t("categoriesGoods.table.status"),
+          id: this.$t("mainNews.table.id"),
+          title: this.$t("mainNews.table.title"),
+          img: this.$t("mainNews.table.img"),
+          status_title: this.$t("mainNews.table.status"),
           actions: "",
         },
-        sortable: ["id", "title"],
-        columnsClasses: {
-          id: "id",
-          actions: "actions",
-          img: "img",
-          status: "status",
-        },
+        // sortable: ["id", "title", "status_title", "category_title"],
         params: {},
       },
       formModal: {
@@ -126,10 +112,13 @@ export default {
   computed: {
     tableColumns() {
       const actions = ["actions"];
-      return ["id", "title", "img", "status", ...actions];
+      return ["id", "title", "status_title", "img", ...actions];
     },
   },
   methods: {
+    imgUrl(rowItem) {
+      return this.baseUrl + rowItem.img.src + this.img_size;
+    },
     searchRefresh() {
       this.$refs.searchForm.fetchFilters();
     },
@@ -138,29 +127,27 @@ export default {
       this.$_table_debouncedRefresh();
     },
     refreshTable() {
-      this.$refs.settingsSiteTable.getData();
+      this.$refs.mainNewsTable.getData();
     },
     openCreateModal() {
       this.formModal.show = true;
-      this.formModal.title = this.$t("settingsSite.create");
+      this.formModal.title = this.$t("mainNews.create");
     },
-    openUpdateModal(row) {
-      this.formModal.id = row.id;
+    openUpdateModal(id) {
+      this.formModal.id = id;
       this.formModal.show = true;
-      this.formModal.title = this.$t("settingsSite.update");
+      this.formModal.title = this.$t("mainNews.update");
     },
     handleSave(event) {
       event.preventDefault();
-      this.$refs.settingsSiteForm.submit();
+      this.$refs.mainNewsForm.submit();
     },
     resetForm() {
       this.formModal.id = null;
     },
-    async handleDelete(id, name) {
+    async handleDelete(id) {
       const result = await this.$_notification_confirmDelete(
-        this.$t("main.confirm.delete"),
-        this.$t("settingsSite.to_delete"),
-        name
+        this.$t("main.confirm.delete")
       );
       if (result.value) {
         await Api.deleteModel(id);
@@ -183,7 +170,7 @@ export default {
       this.refreshTable();
     },
     handleView({ row }) {
-      this.openUpdateModal(row);
+      this.openUpdateModal(row.id);
     },
   },
 };

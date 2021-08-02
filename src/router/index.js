@@ -13,6 +13,7 @@ import Partners from '../views/Partners'
 import Employees from '../views/Employees'
 import Settings from '../views/Settings'
 import CategoriesGoods from '../views/CategoriesGoods'
+import MainNews from '../views/MainNews'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -156,11 +157,28 @@ const router = new Router({
       meta: {
         requiresAuth: true,
         onlyWorker: true,
-        title: i18n.t('main.meta.settings'),
+        title: i18n.t('main.meta.categoriesGoods'),
         layout: 'simple',
       },
       components: {
         default: CategoriesGoods,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/main-news',
+      name: 'main-news',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.mainNews'),
+        layout: 'simple',
+      },
+      components: {
+        default: MainNews,
         navbar: SimpleHeader,
         footer: FooterSimple,
         sidebar: Sidebar
