@@ -12,7 +12,7 @@
           <b-form-input :state="form.isValid('title')" v-model="form.title">
           </b-form-input>
           <b-form-invalid-feedback
-            :style="{ display: !!form.errors.get('content') ? 'block' : 'none' }"
+            :style="{ display: !!form.errors.get('title') ? 'block' : 'none' }"
             v-text="form.errors.get('title')"
           ></b-form-invalid-feedback>
         </b-form-group>

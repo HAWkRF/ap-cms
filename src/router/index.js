@@ -11,6 +11,7 @@ import User from '../views/User'
 import Vacancy from '../views/Vacancy'
 import Partners from '../views/Partners'
 import Employees from '../views/Employees'
+import Settings from '../views/Settings'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -131,6 +132,22 @@ const router = new Router({
       },
     },
 
+    {
+      path: '/settings',
+      name: 'settings',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.settings'),
+        layout: 'simple',
+      },
+      components: {
+        default: Settings,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
 
     {
       path: '/users',

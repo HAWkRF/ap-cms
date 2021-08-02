@@ -47,6 +47,11 @@
         <span class="micon micon__users"></span>
         <span class="title">{{ $t("main.nav.employees") }}</span>
       </div>
+      <hr />
+        <div class="item-ap" @click="handleSettings">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.settingsSite") }}</span>
+      </div>
 
     </div>
   </div>
@@ -104,6 +109,10 @@ export default {
     },
     handleEmployees() {
       this.$router.push({ name: "employees" });
+      this.collapsedCondition();
+    },
+    handleSettings() {
+      this.$router.push({ name: "settings" });
       this.collapsedCondition();
     },
     collapsedCondition() {

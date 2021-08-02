@@ -4,6 +4,7 @@ import places from './places.js'
 import vacancy from './vacancy.js'
 import partners from './partners.js'
 import employees from './employees.js'
+import settingsSite from './settingsSite'
 
 let systemName = 'AkratoPRIME CMS';
 
@@ -14,6 +15,7 @@ export default {
   vacancy,
   partners,
   employees,
+  settingsSite,
 
   selected: {
     allPages: 'Все страницы',
@@ -86,6 +88,7 @@ export default {
       vacancy: 'Вакансии',
       partners: 'Партнеры',
       employees: 'Сотрудники',
+      settingsSite: 'Настройки сайта',
     },
 
     load_img: 'Выбрать файл для загрузки.',
@@ -137,6 +140,7 @@ export default {
       vacancy: 'Вакансии',
       partners: 'Партнеры',
       employees: 'Сотрудники',
+      settingsSite: 'Настройки сайта',
       client: 'Профиль',
       login: 'Вход',
       forgot: 'Забыли пароль',

@@ -3,7 +3,7 @@ export default {
     update: 'Редактировать',
 
     page_title: 'Вакансии',
-    id: 'Id',
+    id: 'id',
     title: 'Название вакансии',
     img: 'Фотография для вакансии',
     status: 'Статус',
@@ -18,7 +18,7 @@ export default {
     },
     
     search: {
-      id: "Id",
+      id: "id",
       title: 'Название вакансии',
       status: 'Статус',
     }

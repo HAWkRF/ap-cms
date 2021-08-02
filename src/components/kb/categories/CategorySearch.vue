@@ -2,41 +2,43 @@
   <b-form>
     <b-form-row>
       <b-col md="1">
-        <b-form-group>
+        <b-input-group>
           <b-form-input
+            type="search"
             v-model="search.id"
             :placeholder="$t('kb.categories.search.id')"
           >
           </b-form-input>
-        </b-form-group>
+        </b-input-group>
       </b-col>
       <b-col md="8">
-        <b-form-group>
+        <b-input-group>
           <b-form-input
+            type="search"
             v-model="search.title"
             :placeholder="$t('kb.categories.search.title')"
           >
           </b-form-input>
-        </b-form-group>
+        </b-input-group>
       </b-col>
 
       <b-col>
         <b-form-group>
-            <multiselect
-              id="statusInput"
-              v-model="statusIdSelect"
-              track-by="id"
-              label="title"
-              :placeholder="$t('main.pickAValue')"
-              :options="statuses"
-              :searchable="false"
-              :allow-empty="false"
-              v-bind="selectOptions"
-            >
-              <template slot="singleLabel" slot-scope="{ option }">{{
-                option.title
-              }}</template>
-            </multiselect>
+          <multiselect
+            id="statusInput"
+            v-model="statusIdSelect"
+            track-by="id"
+            label="title"
+            :placeholder="$t('main.pickAValue')"
+            :options="statuses"
+            :searchable="false"
+            :allow-empty="false"
+            v-bind="selectOptions"
+          >
+            <template slot="singleLabel" slot-scope="{ option }">{{
+              option.title
+            }}</template>
+          </multiselect>
         </b-form-group>
       </b-col>
     </b-form-row>
@@ -47,7 +49,7 @@
 import Api from "@/api/v1/kbcategories";
 import Multiselect from "vue-multiselect";
 export default {
-   data: function () {
+  data: function () {
     return {
       loaded: false,
       search: {
@@ -70,7 +72,7 @@ export default {
     };
   },
   components: {
-    Multiselect
+    Multiselect,
   },
   computed: {},
   methods: {
@@ -84,7 +86,7 @@ export default {
   },
   watch: {
     statusIdSelect(newValue) {
-        if ((newValue !== null) && (newValue !== undefined)) {
+      if (newValue !== null && newValue !== undefined) {
         this.search.status = newValue.id;
       }
     },

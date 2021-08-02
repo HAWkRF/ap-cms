@@ -19,7 +19,7 @@ export default {
     },
   
     search: {
-      id: "Id",
+      id: "id",
       type: "Тип партнера",
       title: "Название",
       status: "Статус",
