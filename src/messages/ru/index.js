@@ -5,6 +5,7 @@ import vacancy from './vacancy.js'
 import partners from './partners.js'
 import employees from './employees.js'
 import settingsSite from './settingsSite'
+import categoriesGoods from './categories-goods'
 
 let systemName = 'AkratoPRIME CMS';
 
@@ -16,6 +17,7 @@ export default {
   partners,
   employees,
   settingsSite,
+  categoriesGoods,
 
   selected: {
     allPages: 'Все страницы',
@@ -89,6 +91,7 @@ export default {
       partners: 'Партнеры',
       employees: 'Сотрудники',
       settingsSite: 'Настройки сайта',
+      categoriesGoods: 'Категории товаров',
     },
 
     load_img: 'Выбрать файл для загрузки.',

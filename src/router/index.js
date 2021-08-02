@@ -12,6 +12,7 @@ import Vacancy from '../views/Vacancy'
 import Partners from '../views/Partners'
 import Employees from '../views/Employees'
 import Settings from '../views/Settings'
+import CategoriesGoods from '../views/CategoriesGoods'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -143,6 +144,23 @@ const router = new Router({
       },
       components: {
         default: Settings,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/categories',
+      name: 'categories',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.settings'),
+        layout: 'simple',
+      },
+      components: {
+        default: CategoriesGoods,
         navbar: SimpleHeader,
         footer: FooterSimple,
         sidebar: Sidebar

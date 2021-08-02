@@ -27,7 +27,7 @@
         <span class="title">{{ $t("main.nav.kb") }}</span>
       </div>
 
-       <div class="item-ap" @click="handleCategories">
+       <div class="item-ap" @click="handleKbCategories">
         <span class="micon micon__users"></span>
         <span class="title">{{ $t("main.nav.kbCategories") }}</span>
       </div>
@@ -52,7 +52,11 @@
         <span class="micon micon__users"></span>
         <span class="title">{{ $t("main.nav.settingsSite") }}</span>
       </div>
-
+      <hr />
+      <div class="item-ap" @click="handleCategories">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.categoriesGoods") }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -95,7 +99,7 @@ export default {
       this.$router.push({ name: "kb" });
       this.collapsedCondition();
     },
-    handleCategories() {
+    handleKbCategories() {
       this.$router.push({ name: "kbcategory" });
       this.collapsedCondition();
     },
@@ -113,6 +117,10 @@ export default {
     },
     handleSettings() {
       this.$router.push({ name: "settings" });
+      this.collapsedCondition();
+    },
+    handleCategories() {
+      this.$router.push({ name: "categories" });
       this.collapsedCondition();
     },
     collapsedCondition() {
