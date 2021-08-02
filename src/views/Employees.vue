@@ -6,16 +6,11 @@
         <div class="search-form">
           <b-row>
             <b-col order-lg="2" lg="auto">
-              <b-button
-                @click="openCreateModal"
-                v-text="$t('employees.create')"
-                block
-              >
+              <b-button @click="openCreateModal" v-text="$t('employees.create')" block>
               </b-button>
             </b-col>
             <b-col order-md="1" col>
-              <employees-search ref="searchForm" @search="search">
-              </employees-search>
+              <employees-search ref="searchForm" @search="search"> </employees-search>
             </b-col>
           </b-row>
         </div>
@@ -28,10 +23,7 @@
           @row-click="handleView"
         >
           <template v-slot:img="{ row }">
-            <img
-              v-if="row.img !== null"
-              :src="baseUrl + row.img.src + img_size"
-            />
+            <img v-if="row.img !== null" :src="baseUrl + row.img.src + img_size" />
           </template>
           <template v-slot:status="{ row }">
             {{ row.statusTitle }}
@@ -77,13 +69,13 @@ import notificationMixin from "@/mixins/notification";
 import filtersMixin from "@/mixins/filters";
 import Api from "@/api/v1/employees";
 import EmployeesSearch from "@/components/employees/EmployeesSearch";
-//import EmployeesForm from "@/components/employees/EmployeesForm";
+import EmployeesForm from "@/components/employees/EmployeesForm";
 import TableActionButtons from "@/components/TableActionButtons";
 
 export default {
   name: "employees",
   components: {
-    //EmployeesForm,
+    EmployeesForm,
     EmployeesSearch,
     TableActionButtons,
   },

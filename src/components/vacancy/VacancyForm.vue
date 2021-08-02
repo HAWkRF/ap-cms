@@ -8,14 +8,11 @@
     <loading :active="loading" :is-full-page="false"> </loading>
     <b-form-row>
       <b-col md="12">
-        <b-form-group
-          :label="$t('vacancy.labels.title')"
-          label-for="titleInput"
-        >
+        <b-form-group :label="$t('vacancy.labels.title')" label-for="titleInput">
           <b-form-input :state="form.isValid('title')" v-model="form.title">
           </b-form-input>
           <b-form-invalid-feedback
-            :style="{display: !!form.errors.get('content') ? 'block':'none'}"
+            :style="{ display: !!form.errors.get('content') ? 'block' : 'none' }"
             v-text="form.errors.get('title')"
           ></b-form-invalid-feedback>
         </b-form-group>
@@ -27,23 +24,23 @@
         <b-form-group :label="$t('vacancy.labels.content')">
           <editor :content="form.content" @content="setContent" />
           <b-form-invalid-feedback
-            :style="{display: !!form.errors.get('content') ? 'block':'none'}"
+            :style="{ display: !!form.errors.get('content') ? 'block' : 'none' }"
             v-text="form.errors.get('content')"
           ></b-form-invalid-feedback>
         </b-form-group>
       </b-col>
     </b-form-row>
 
-      <b-form-row>
+    <b-form-row>
       <b-col md="12">
-        <b-form-group :label="$t('kb.articles.labels.img')">
+        <b-form-group :label="$t('vacancy.labels.img')">
           <b-form-file
             v-model="setImg"
             :state="true"
             :placeholder="$t('main.load_img')"
           ></b-form-file>
           <b-form-invalid-feedback
-            :style="{display: !!form.errors.get('img') ? 'block':'none'}"
+            :style="{ display: !!form.errors.get('img') ? 'block' : 'none' }"
             v-text="form.errors.get('img')"
           ></b-form-invalid-feedback>
         </b-form-group>
@@ -52,10 +49,7 @@
 
     <b-form-row>
       <b-col md="12">
-        <b-form-group
-          :label="$t('vacancy.labels.order')"
-          label-for="orderInput"
-        >
+        <b-form-group :label="$t('vacancy.labels.order')" label-for="orderInput">
           <b-form-input
             type="number"
             min="0"
@@ -64,7 +58,7 @@
           >
           </b-form-input>
           <b-form-invalid-feedback
-            :style="{display: !!form.errors.get('order') ? 'block':'none'}"
+            :style="{ display: !!form.errors.get('order') ? 'block' : 'none' }"
             v-text="form.errors.get('order')"
           ></b-form-invalid-feedback>
         </b-form-group>
@@ -73,10 +67,7 @@
 
     <b-form-row>
       <b-col md="12">
-        <b-form-group
-          :label="$t('vacancy.labels.status')"
-          label-for="statusInput"
-        >
+        <b-form-group :label="$t('vacancy.labels.status')" label-for="statusInput">
           <multiselect
             v-model="statusSelect"
             track-by="id"
@@ -92,7 +83,7 @@
             }}</template>
           </multiselect>
           <b-form-invalid-feedback
-            :style="{display: !!form.errors.get('status') ? 'block':'none'}"
+            :style="{ display: !!form.errors.get('status') ? 'block' : 'none' }"
             v-text="form.errors.get('status')"
           ></b-form-invalid-feedback>
         </b-form-group>
@@ -117,7 +108,7 @@ export default {
       default: null,
     },
   },
-  data: function() {
+  data: function () {
     return {
       loading: false,
 
@@ -153,6 +144,9 @@ export default {
   methods: {
     setContent(content) {
       this.form.content = content;
+    },
+    setImg(content) {
+      (this.Form.img = content), (this.form.img = content.src);
     },
     async load(id) {
       const response = await Api.getModel(id);
@@ -190,7 +184,7 @@ export default {
       await this.load(this.internalId);
     } else {
       this.isNewForm = true;
-            this.statusSelect = this.statuses[0];
+      this.statusSelect = this.statuses[0];
     }
     this.loading = false;
   },

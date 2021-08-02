@@ -1,6 +1,6 @@
 export default {
     page_title: "Партнеры",
-    id: "Id",
+    id: "id",
     title: "Название",
     type: "Тип партнера",
     img: "Логотип",
@@ -13,7 +13,7 @@ export default {
       title: "Название",
       content: "Описание",
       img: "Логотип",
-      order: "Сортировка",
+      sort: "Сортировка",
       type: "Тип партнера",
       status: "Статус",
     },

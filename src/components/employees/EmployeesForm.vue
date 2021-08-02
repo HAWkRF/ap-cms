@@ -8,19 +8,20 @@
     <loading :active="loading" :is-full-page="false"> </loading>
     <b-form-row>
       <b-col md="12">
-        <b-form-group :label="$t('partners.labels.title')" label-for="titleInput">
+        <b-form-group :label="$t('employees.labels.title')" label-for="titleInput">
           <b-form-input :state="form.isValid('title')" v-model="form.title">
           </b-form-input>
           <b-form-invalid-feedback
-            :style="{ display: !!form.errors.get('title') ? 'block' : 'none' }"
+            :style="{ display: !!form.errors.get('content') ? 'block' : 'none' }"
             v-text="form.errors.get('title')"
           ></b-form-invalid-feedback>
         </b-form-group>
       </b-col>
     </b-form-row>
+
     <b-form-row>
       <b-col md="12">
-        <b-form-group :label="$t('partners.labels.content')">
+        <b-form-group :label="$t('employees.labels.content')">
           <editor :content="form.content" @content="setContent" />
           <b-form-invalid-feedback
             :style="{ display: !!form.errors.get('content') ? 'block' : 'none' }"
@@ -29,9 +30,10 @@
         </b-form-group>
       </b-col>
     </b-form-row>
+
     <b-form-row>
       <b-col md="12">
-        <b-form-group :label="$t('partners.labels.img')">
+        <b-form-group :label="$t('employees.labels.img')">
           <b-form-file
             v-model="setImg"
             :state="true"
@@ -44,33 +46,10 @@
         </b-form-group>
       </b-col>
     </b-form-row>
+
     <b-form-row>
       <b-col md="12">
-        <b-form-group :label="$t('partners.labels.type')" label-for="typeInput">
-          <multiselect
-            v-model="typeSelect"
-            track-by="id"
-            label="title"
-            :placeholder="$t('main.pickAValue')"
-            :options="types"
-            :searchable="false"
-            :allow-empty="false"
-            v-bind="selectOptions"
-          >
-            <template slot="singleLabel" slot-scope="{ option }">{{
-              option.title
-            }}</template>
-          </multiselect>
-          <b-form-invalid-feedback
-            :style="{ display: !!form.errors.get('type') ? 'block' : 'none' }"
-            v-text="form.errors.get('type')"
-          ></b-form-invalid-feedback>
-        </b-form-group>
-      </b-col>
-    </b-form-row>
-    <b-form-row>
-      <b-col md="12">
-        <b-form-group :label="$t('partners.labels.sort')" label-for="sortInput">
+        <b-form-group :label="$t('employees.labels.sort')" label-for="sortInput">
           <b-form-input
             type="number"
             min="0"
@@ -85,9 +64,10 @@
         </b-form-group>
       </b-col>
     </b-form-row>
+
     <b-form-row>
       <b-col md="12">
-        <b-form-group :label="$t('partners.labels.status')" label-for="statusInput">
+        <b-form-group :label="$t('employees.labels.status')" label-for="statusInput">
           <multiselect
             v-model="statusSelect"
             track-by="id"
@@ -114,7 +94,7 @@
 
 <script>
 import Form from "@/utils/Form";
-import Api from "@/api/v1/partners";
+import Api from "@/api/v1/employees";
 import Multiselect from "vue-multiselect";
 import editor from "@/components/editor";
 
@@ -131,9 +111,8 @@ export default {
   data: function () {
     return {
       loading: false,
+
       statuses: [],
-      types: [],
-      typeSelect: null,
       statusSelect: null,
       selectOptions: {
         multiple: false,
@@ -150,7 +129,6 @@ export default {
         title: "",
         content: "",
         img: "",
-        type: "",
         sort: null,
         status: "",
       }),
@@ -160,11 +138,6 @@ export default {
     statusSelect(newValue) {
       if (newValue !== undefined) {
         this.form.status = newValue.id;
-      }
-    },
-    typeSelect(newValue) {
-      if (newValue !== undefined) {
-        this.form.type = newValue.id;
       }
     },
   },
@@ -178,7 +151,6 @@ export default {
     async load(id) {
       const response = await Api.getModel(id);
       this.form.load(response.data);
-      this.typeSelect = this.types.find((x) => String(x.id) === String(this.form.type));
       this.statusSelect = this.statuses.find(
         (x) => String(x.id) === String(this.form.status)
       );
@@ -186,7 +158,6 @@ export default {
     async filtersLoad() {
       const response = await Api.getFilters();
       this.statuses = response.data.statuses;
-      this.types = response.data.types;
     },
     async submit() {
       try {
@@ -214,7 +185,6 @@ export default {
     } else {
       this.isNewForm = true;
       this.statusSelect = this.statuses[0];
-      this.typeSelect = this.types[0];
     }
     this.loading = false;
   },

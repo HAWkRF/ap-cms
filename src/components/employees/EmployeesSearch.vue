@@ -4,7 +4,7 @@
       <b-col md="1">
         <b-form-group>
           <b-form-input
-          type="search"
+            type="search"
             v-model="search.id"
             :placeholder="$t('employees.search.id')"
           >
@@ -14,7 +14,7 @@
       <b-col>
         <b-form-group>
           <b-form-input
-          type="search"
+            type="search"
             v-model="search.title"
             :placeholder="$t('employees.search.title')"
           >
@@ -49,13 +49,13 @@
 
 <script>
 import Multiselect from "vue-multiselect";
-import Api from '@/api/v1/employees';
+import Api from "@/api/v1/employees";
 
 export default {
   components: {
-    Multiselect
+    Multiselect,
   },
-   data () {
+  data() {
     return {
       loaded: false,
       searchStatus: null,
@@ -91,10 +91,10 @@ export default {
   },
   watch: {
     searchStatus(newValue) {
-        if(newValue !== null && newValue !== undefined) {
-          this.search.status = newValue.id;
-        }
-      },
+      if (newValue !== null && newValue !== undefined) {
+        this.search.status = newValue.id;
+      }
+    },
     search: {
       handler(value) {
         this.$emit("search", value);

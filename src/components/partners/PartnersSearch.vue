@@ -1,22 +1,20 @@
 <template>
   <b-form>
     <b-form-row>
-
       <b-col md="1">
         <b-input-group>
           <b-form-input
-          type="search"
+            type="search"
             v-model="search.id"
             :placeholder="$t('partners.search.id')"
           ></b-form-input>
         </b-input-group>
       </b-col>
 
-
-      <b-col >
+      <b-col>
         <b-input-group>
           <b-form-input
-          type="search"
+            type="search"
             v-model="search.title"
             :placeholder="$t('partners.search.title')"
           ></b-form-input>
@@ -38,9 +36,7 @@
             <div
               class="multiselect__clear"
               v-if="search.type !== ''"
-              @mousedown.prevent.stop="
-                clearField('type', 'searchTypes')
-              "
+              @mousedown.prevent.stop="clearField('type', 'searchTypes')"
             >
               <font-awesome-icon icon="times"></font-awesome-icon>
             </div>
@@ -70,8 +66,6 @@
           </template>
         </multiselect>
       </b-col>
-
-      <!-- End form -->
     </b-form-row>
   </b-form>
 </template>
@@ -124,12 +118,12 @@ export default {
   },
   watch: {
     searchTypes(newValue) {
-      if ((newValue !== null) && (newValue !== undefined)) {
+      if (newValue !== null && newValue !== undefined) {
         this.search.type = newValue.id;
       }
     },
     searchStatus(newValue) {
-        if ((newValue !== null) && (newValue !== undefined)) {
+      if (newValue !== null && newValue !== undefined) {
         this.search.status = newValue.id;
       }
     },

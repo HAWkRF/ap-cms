@@ -20,7 +20,7 @@ export default {
       status: "Статус",
       img: "Изображение",
       content: "Должность, описание",
-      order: "Порядок",
+      sort: "Порядок",
     },
   
     search: {
