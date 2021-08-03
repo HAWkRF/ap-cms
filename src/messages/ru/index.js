@@ -7,6 +7,8 @@ import employees from './employees.js'
 import settingsSite from './settingsSite'
 import categoriesGoods from './categories-goods'
 import mainNews from './main-news'
+import news from './news'
+import pages from './pages'
 
 let systemName = 'AkratoPRIME CMS';
 
@@ -20,6 +22,9 @@ export default {
   settingsSite,
   categoriesGoods,
   mainNews,
+  news,
+  pages,
+
 
   selected: {
     allPages: 'Все страницы',
@@ -95,6 +100,8 @@ export default {
       settingsSite: 'Настройки сайта',
       categoriesGoods: 'Категории товаров',
       mainNews: 'Контент. Категории статей',
+      news: 'Контент. Статьи',
+      pages: 'Контент. Страницы',
     },
 
     load_img: 'Выбрать файл для загрузки.',
@@ -147,7 +154,9 @@ export default {
       partners: 'Партнеры',
       employees: 'Сотрудники',
       categoriesGoods: 'Категории товаров',
-      mainNews: 'Категории статей',
+      mainNews: 'Контент. Категории статей',
+      pages: 'Контент. Страницы',
+      news: 'Контент. Статьи',
       settingsSite: 'Настройки сайта',
       client: 'Профиль',
       login: 'Вход',

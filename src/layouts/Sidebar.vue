@@ -61,7 +61,15 @@
         <div class="item-ap" @click="handleMainNews">
         <span class="micon micon__users"></span>
         <span class="title">{{ $t("main.nav.mainNews") }}</span>
-      </div>
+        </div>
+        <div class="item-ap" @click="handleNews">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.news") }}</span>
+        </div>
+        <div class="item-ap" @click="handlePages">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.pages") }}</span>
+        </div>
     </div>
   </div>
 </template>
@@ -130,6 +138,14 @@ export default {
     },
     handleMainNews() {
       this.$router.push({ name: "main-news" });
+      this.collapsedCondition();
+    },
+    handleNews() {
+      this.$router.push({ name: "news" });
+      this.collapsedCondition();
+    },
+    handlePages() {
+      this.$router.push({name: "pages"});
       this.collapsedCondition();
     },
     collapsedCondition() {

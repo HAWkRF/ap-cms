@@ -14,6 +14,8 @@ import Employees from '../views/Employees'
 import Settings from '../views/Settings'
 import CategoriesGoods from '../views/CategoriesGoods'
 import MainNews from '../views/MainNews'
+import News from '../views/News'
+import Pages from '../views/Pages'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -179,6 +181,40 @@ const router = new Router({
       },
       components: {
         default: MainNews,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/news',
+      name: 'news',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.news'),
+        layout: 'simple',
+      },
+      components: {
+        default: News,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/pages',
+      name: 'pages',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.pages'),
+        layout: 'simple',
+      },
+      components: {
+        default: Pages,
         navbar: SimpleHeader,
         footer: FooterSimple,
         sidebar: Sidebar
