@@ -9,18 +9,26 @@ export default {
     title: 'Название',
     status: 'Статус',
     img: 'Изображение',
-},
+  },
 
   labels: {
     title: "Название",
     status: "Статус",
     img: "Изображение",
-    category_id: "Категория",
+    seo_title: 'seo title',
+    seo_description: 'seo description',
+    seo_keywords: 'seo keywords',
+    og_site_name: 'og site name',
+    og_title: 'og title',
+    og_type: 'og type',
+    og_image: 'og image',
+    og_url: 'og url',
+    og_description: 'og description',
 
   },
     
   search: {
-    id: "Id",
+    id: "id",
     title: "Название",
     status: "Статус",
   }, 

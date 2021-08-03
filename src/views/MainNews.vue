@@ -3,18 +3,14 @@
     <div class="row-ap">
       <div class="col-12">
         <h1>{{ $t("mainNews.page_title") }}</h1>
-          <div class="search-form">
-            <b-row>
-              <b-col order-lg="2" lg="auto">
-                <b-button
-                @click="openCreateModal"
-                v-text="$t('mainNews.create')"
-                block
-              >
-                </b-button>
-              </b-col>
+        <div class="search-form">
+          <b-row>
+            <b-col order-lg="2" lg="auto">
+              <b-button @click="openCreateModal" v-text="$t('mainNews.create')" block>
+              </b-button>
+            </b-col>
             <b-col order-md="1" col>
-              <kb-search ref="searchForm" @search="search"> </kb-search>
+              <main-news-search ref="searchForm" @search="search"> </main-news-search>
             </b-col>
           </b-row>
         </div>
@@ -30,7 +26,7 @@
             {{ row.title }}
           </template>
           <template v-slot:img="{ row }">
-            <img v-if="row.img !== null" :src="imgUrl(row)"/>
+            <img v-if="row.img !== null" :src="imgUrl(row)" />
           </template>
           <template v-slot:count_canvas="{ row }">
             {{ row.count_canvas }}
@@ -57,13 +53,13 @@
           @ok="handleSave"
           @hidden="resetForm"
         >
-          <kb-form
+          <main-news-form
             ref="mainNewsForm"
             :internalId="formModal.id"
             @updated="updated"
             @created="created"
           >
-          </kb-form>
+          </main-news-form>
         </b-modal>
       </div>
     </div>
@@ -75,13 +71,15 @@ import tableRefreshMixin from "@/mixins/table";
 import notificationMixin from "@/mixins/notification";
 import filtersMixin from "@/mixins/filters";
 import Api from "@/api/v1/main-news";
-import MainNewsSearch from '@/components/main-news/MainNewsSearch';
-// import KbForm from "@/components/kb/articles/KbForm";
+import MainNewsSearch from "@/components/main-news/MainNewsSearch";
+import MainNewsForm from "@/components/main-news/MainNewsForm";
 import TableActionButtons from "@/components/TableActionButtons";
 
 export default {
+  name: "main-news",
   components: {
     MainNewsSearch,
+    MainNewsForm,
     TableActionButtons,
   },
   mixins: [notificationMixin, tableRefreshMixin, filtersMixin],
@@ -99,7 +97,7 @@ export default {
           status_title: this.$t("mainNews.table.status"),
           actions: "",
         },
-        // sortable: ["id", "title", "status_title", "category_title"],
+        sortable: ["id", "title", "status_title"],
         params: {},
       },
       formModal: {

@@ -27,7 +27,7 @@
           track-by="id"
           label="title"
           :placeholder="$t('mainNews.search.status')"
-          :options="categories"
+          :options="statuses"
           :searchable="true"
           :allow-empty="true"
           v-bind="selectOptions"
@@ -35,7 +35,7 @@
           <template slot="clear">
             <div
               class="multiselect__clear"
-              v-if="search.category_id !== ''"
+              v-if="search.status !== ''"
               @mousedown.prevent.stop="clearField('status', 'searchStatus')"
             >
               <font-awesome-icon icon="times"></font-awesome-icon>
