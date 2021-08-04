@@ -74,6 +74,10 @@
         <span class="micon micon__users"></span>
         <span class="title">{{ $t("main.nav.blocks") }}</span>
         </div>
+        <div class="item-ap" @click="handleBanners">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.banners") }}</span>
+        </div>
     </div>
   </div>
 </template>
@@ -154,6 +158,10 @@ export default {
     },
     handleBlocks() {
       this.$router.push({name: "blocks"});
+      this.collapsedCondition();
+    },
+    handleBanners() {
+      this.$router.push({name: "banners"});
       this.collapsedCondition();
     },
     collapsedCondition() {
