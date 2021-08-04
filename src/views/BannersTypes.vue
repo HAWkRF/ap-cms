@@ -2,11 +2,11 @@
   <div class="container-fluid">
     <div class="row-ap">
       <div class="col-12">
-        <h1>{{ $t("banners.page_title") }}</h1>
+        <h1>{{ $t("bannersTypes.page_title") }}</h1>
         <div class="search-form">
           <b-row>
             <b-col order-lg="2" lg="auto">
-              <b-button @click="openCreateModal" v-text="$t('banners.create')" block>
+              <b-button @click="openCreateModal" v-text="$t('bannersTypes.create')" block>
               </b-button>
             </b-col>
             <b-col order-md="1" col>
@@ -16,7 +16,7 @@
         </div>
 
         <v-server-table
-          ref="bannersTable"
+          ref="bannersTypesTable"
           :url="apiUrl"
           :columns="tableColumns"
           :options="tableOptions"
@@ -54,7 +54,7 @@
           @hidden="resetForm"
         >
           <banners-form
-            ref="bannersForm"
+            ref="bannersTypesForm"
             :internalId="formModal.id"
             @updated="updated"
             @created="created"
@@ -70,16 +70,16 @@
 import tableRefreshMixin from "@/mixins/table";
 import notificationMixin from "@/mixins/notification";
 import filtersMixin from "@/mixins/filters";
-import Api from "@/api/v1/banners";
-import BannersSearch from "@/components/banners/BannersSearch";
-import BannersForm from "@/components/banners/BannersForm";
+import Api from "@/api/v1/banners-types";
+//import BannersSearch from "@/components/banners/BannersSearch";
+//import BannersForm from "@/components/banners/BannersForm";
 import TableActionButtons from "@/components/TableActionButtons";
 
 export default {
-  name: "banners",
+  name: "banners-types",
   components: {
-    BannersForm,
-    BannersSearch,
+    //BannersForm,
+    //BannersSearch,
     TableActionButtons,
   },
   mixins: [notificationMixin, tableRefreshMixin, filtersMixin],
@@ -91,12 +91,15 @@ export default {
       tableOptions: {
         perPage: 10,
         headings: {
-          id: this.$t("banners.table.id"),
-          title: this.$t("banners.table.title"),
-          statusTitle: this.$t("banners.table.status"),
+          id: this.$t("bannersTypes.table.id"),
+          title: this.$t("bannersTypes.table.title"),
+          banner_title: this.$t("bannersTypes.table.banner_title"),
+          statusTitle: this.$t("bannersTypes.table.status"),
+          type: this.$t("bannersTypes.table.type"),
+          sort: this.$t("bannersTypes.table.sort"),
           actions: "",
         },
-        sortable: ["id", "title", "statusTitle"],
+        sortable: ["id", "title", "statusTitle", "banner_title", "type", "sort"],
         params: {},
       },
       formModal: {
@@ -109,7 +112,7 @@ export default {
   computed: {
     tableColumns() {
       const actions = ["actions"];
-      return ["id", "title", "statusTitle", ...actions];
+      return ["id", "title", "banner_title", "type", "sort", "statusTitle", ...actions];
     },
   },
   methods: {
@@ -124,20 +127,20 @@ export default {
       this.$_table_debouncedRefresh();
     },
     refreshTable() {
-      this.$refs.bannersTable.getData();
+      this.$refs.bannersTypesTable.getData();
     },
     openCreateModal() {
       this.formModal.show = true;
-      this.formModal.title = this.$t("banners.create");
+      this.formModal.title = this.$t("bannersTypes.create");
     },
     openUpdateModal(id) {
       this.formModal.id = id;
       this.formModal.show = true;
-      this.formModal.title = this.$t("banners.update");
+      this.formModal.title = this.$t("bannersTypes.update");
     },
     handleSave(event) {
       event.preventDefault();
-      this.$refs.bannersForm.submit();
+      this.$refs.bannersTypesForm.submit();
     },
     resetForm() {
       this.formModal.id = null;

@@ -17,7 +17,7 @@
           >
           </b-form-input>
           <b-form-invalid-feedback
-            :style="{display: !!form.errors.get('title') ? 'block':'none'}"
+            :style="{ display: !!form.errors.get('title') ? 'block' : 'none' }"
             v-text="form.errors.get('title')"
           ></b-form-invalid-feedback>
         </b-form-group>
@@ -33,13 +33,13 @@
           >
           </b-form-input>
           <b-form-invalid-feedback
-            :style="{display: !!form.errors.get('alias') ? 'block':'none'}"
+            :style="{ display: !!form.errors.get('alias') ? 'block' : 'none' }"
             v-text="form.errors.get('alias')"
           ></b-form-invalid-feedback>
         </b-form-group>
       </b-col>
     </b-form-row>
-        <b-form-row>
+    <b-form-row>
       <b-col md="6">
         <b-form-group :label="$t('banners.labels.status')" label-for="statusInput">
           <multiselect
@@ -58,12 +58,12 @@
             }}</template>
           </multiselect>
           <b-form-invalid-feedback
-            :style="{display: !!form.errors.get('status') ? 'block':'none'}"
+            :style="{ display: !!form.errors.get('status') ? 'block' : 'none' }"
             v-text="form.errors.get('status')"
           ></b-form-invalid-feedback>
         </b-form-group>
       </b-col>
-        </b-form-row>
+    </b-form-row>
   </b-form>
 </template>
 
@@ -109,7 +109,7 @@ export default {
         id: null,
         title: "",
         status: 0,
-        alias: ""
+        alias: "",
       }),
     };
   },

@@ -18,6 +18,7 @@ import News from '../views/News'
 import Pages from '../views/Pages'
 import Blocks from '../views/Blocks'
 import Banners from '../views/Banners'
+import BannersTypes from '../views/BannersTypes'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -251,6 +252,23 @@ const router = new Router({
       },
       components: {
         default: Banners,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/banners-types',
+      name: 'banners-types',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.banners'),
+        layout: 'simple',
+      },
+      components: {
+        default: BannersTypes,
         navbar: SimpleHeader,
         footer: FooterSimple,
         sidebar: Sidebar
