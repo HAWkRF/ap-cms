@@ -70,6 +70,10 @@
         <span class="micon micon__users"></span>
         <span class="title">{{ $t("main.nav.pages") }}</span>
         </div>
+        <div class="item-ap" @click="handleBlocks">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.blocks") }}</span>
+        </div>
     </div>
   </div>
 </template>
@@ -146,6 +150,10 @@ export default {
     },
     handlePages() {
       this.$router.push({name: "pages"});
+      this.collapsedCondition();
+    },
+    handleBlocks() {
+      this.$router.push({name: "blocks"});
       this.collapsedCondition();
     },
     collapsedCondition() {

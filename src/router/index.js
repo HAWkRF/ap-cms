@@ -16,6 +16,7 @@ import CategoriesGoods from '../views/CategoriesGoods'
 import MainNews from '../views/MainNews'
 import News from '../views/News'
 import Pages from '../views/Pages'
+import Blocks from '../views/Blocks'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -215,6 +216,23 @@ const router = new Router({
       },
       components: {
         default: Pages,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/blocks',
+      name: 'blocks',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.pages'),
+        layout: 'simple',
+      },
+      components: {
+        default: Blocks,
         navbar: SimpleHeader,
         footer: FooterSimple,
         sidebar: Sidebar

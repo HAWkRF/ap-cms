@@ -9,6 +9,7 @@ import categoriesGoods from './categories-goods'
 import mainNews from './main-news'
 import news from './news'
 import pages from './pages'
+import blocks from './blocks'
 
 let systemName = 'AkratoPRIME CMS';
 
@@ -24,6 +25,7 @@ export default {
   mainNews,
   news,
   pages,
+  blocks,
 
 
   selected: {
@@ -102,6 +104,7 @@ export default {
       mainNews: 'Контент. Категории статей',
       news: 'Контент. Статьи',
       pages: 'Контент. Страницы',
+      blocks: 'Контент. Блоки контента',
     },
 
     load_img: 'Выбрать файл для загрузки.',
@@ -158,6 +161,7 @@ export default {
       pages: 'Контент. Страницы',
       news: 'Контент. Статьи',
       settingsSite: 'Настройки сайта',
+      blocks: 'Контент. Блоки контента',
       client: 'Профиль',
       login: 'Вход',
       forgot: 'Забыли пароль',

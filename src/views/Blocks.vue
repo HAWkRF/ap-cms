@@ -2,25 +2,21 @@
   <div class="container-fluid">
     <div class="row-ap">
       <div class="col-12">
-        <h1>{{ $t("pages.page_title") }}</h1>
-          <div class="search-form">
-            <b-row>
-              <b-col order-lg="2" lg="auto">
-                <b-button
-                @click="openCreateModal"
-                v-text="$t('pages.create')"
-                block
-              >
-                </b-button>
-              </b-col>
+        <h1>{{ $t("blocks.page_title") }}</h1>
+        <div class="search-form">
+          <b-row>
+            <b-col order-lg="2" lg="auto">
+              <b-button @click="openCreateModal" v-text="$t('blocks.create')" block>
+              </b-button>
+            </b-col>
             <b-col order-md="1" col>
-              <pages-search ref="searchForm" @search="search"> </pages-search>
+              <blocks-search ref="searchForm" @search="search"> </blocks-search>
             </b-col>
           </b-row>
         </div>
 
         <v-server-table
-          ref="pagesTable"
+          ref="blocksTable"
           :url="apiUrl"
           :columns="tableColumns"
           :options="tableOptions"
@@ -54,13 +50,13 @@
           @ok="handleSave"
           @hidden="resetForm"
         >
-          <pages-form
-            ref="pagesForm"
+          <blocks-form
+            ref="blocksForm"
             :internalId="formModal.id"
             @updated="updated"
             @created="created"
           >
-          </pages-form>
+          </blocks-form>
         </b-modal>
       </div>
     </div>
@@ -71,16 +67,16 @@
 import tableRefreshMixin from "@/mixins/table";
 import notificationMixin from "@/mixins/notification";
 import filtersMixin from "@/mixins/filters";
-import Api from "@/api/v1/pages";
-//import PagesSearch from "@/components/pages/PagesSearch";
-//import PagesForm from "@/components/pages/PagesForm";
+import Api from "@/api/v1/blocks";
+import BlocksSearch from "@/components/blocks/BlocksSearch";
+import BlocksForm from "@/components/blocks/BlocksForm";
 import TableActionButtons from "@/components/TableActionButtons";
 
 export default {
-  name: "pages",
+  name: "blocks",
   components: {
-    // PagesForm,
-    // PagesSearch,
+    BlocksForm,
+    BlocksSearch,
     TableActionButtons,
   },
   mixins: [notificationMixin, tableRefreshMixin, filtersMixin],
@@ -88,16 +84,16 @@ export default {
     return {
       apiUrl: Api.baseUrl,
       baseUrl: process.env.VUE_APP_API,
-      img_size: "?w=80&h=80",
       tableOptions: {
         perPage: 10,
         headings: {
-          id: this.$t("pages.table.id"),
-          title: this.$t("pages.table.title"),
-          status_title: this.$t("pages.table.status"),
+          id: this.$t("blocks.table.id"),
+          title: this.$t("blocks.table.title"),
+          alias: this.$t("blocks.table.alias"),
+          statusTitle: this.$t("blocks.table.status"),
           actions: "",
         },
-        sortable: ["id", "title", "status_title"],
+        sortable: ["id", "title", "alias", "statusTitle"],
         params: {},
       },
       formModal: {
@@ -110,7 +106,7 @@ export default {
   computed: {
     tableColumns() {
       const actions = ["actions"];
-      return ["id", "title", "status_title", ...actions];
+      return ["id", "title", "alias", "statusTitle", ...actions];
     },
   },
   methods: {
@@ -125,20 +121,20 @@ export default {
       this.$_table_debouncedRefresh();
     },
     refreshTable() {
-      this.$refs.pagesTable.getData();
+      this.$refs.blocksTable.getData();
     },
     openCreateModal() {
       this.formModal.show = true;
-      this.formModal.title = this.$t("pages.create");
+      this.formModal.title = this.$t("blocks.create");
     },
     openUpdateModal(id) {
       this.formModal.id = id;
       this.formModal.show = true;
-      this.formModal.title = this.$t("pages.update");
+      this.formModal.title = this.$t("blocks.update");
     },
     handleSave(event) {
       event.preventDefault();
-      this.$refs.pagesForm.submit();
+      this.$refs.blocksForm.submit();
     },
     resetForm() {
       this.formModal.id = null;
