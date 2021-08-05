@@ -139,7 +139,6 @@ export default {
       this.statuses = response.data.statuses;
       this.banners = response.data.banners;
       this.types = response.data.types;
-      this.menus = response.data.menus;
     },
     clearField(field, searhField) {
       this.search[field] = "";

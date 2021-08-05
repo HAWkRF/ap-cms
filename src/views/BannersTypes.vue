@@ -10,7 +10,8 @@
               </b-button>
             </b-col>
             <b-col order-md="1" col>
-              <banners-types-search ref="searchForm" @search="search"> </banners-types-search>
+              <banners-types-search ref="searchForm" @search="search">
+              </banners-types-search>
             </b-col>
           </b-row>
         </div>
@@ -53,13 +54,13 @@
           @ok="handleSave"
           @hidden="resetForm"
         >
-          <banners-form
+          <banners-types-form
             ref="bannersTypesForm"
             :internalId="formModal.id"
             @updated="updated"
             @created="created"
           >
-          </banners-form>
+          </banners-types-form>
         </b-modal>
       </div>
     </div>
@@ -72,13 +73,13 @@ import notificationMixin from "@/mixins/notification";
 import filtersMixin from "@/mixins/filters";
 import Api from "@/api/v1/banners-types";
 import BannersTypesSearch from "@/components/banners-types/BannersTypesSearch";
-//import BannersForm from "@/components/banners/BannersForm";
+import BannersTypesForm from "@/components/banners-types/BannersTypesForm";
 import TableActionButtons from "@/components/TableActionButtons";
 
 export default {
   name: "banners-types",
   components: {
-    //BannersForm,
+    BannersTypesForm,
     BannersTypesSearch,
     TableActionButtons,
   },
@@ -112,7 +113,15 @@ export default {
   computed: {
     tableColumns() {
       const actions = ["actions"];
-      return ["id", "title", "banner_title", "typeTitle", "sort", "statusTitle", ...actions];
+      return [
+        "id",
+        "title",
+        "banner_title",
+        "typeTitle",
+        "sort",
+        "statusTitle",
+        ...actions,
+      ];
     },
   },
   methods: {

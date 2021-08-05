@@ -179,8 +179,9 @@ export default {
   data: function () {
     return {
       loading: false,
-      typeSelect: false,
+
       types: [],
+      typeSelect: false,
       selectOptions: {
         multiple: false,
         showNoOptions: false,
