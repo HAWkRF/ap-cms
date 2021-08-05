@@ -10,7 +10,7 @@
               </b-button>
             </b-col>
             <b-col order-md="1" col>
-              <banners-search ref="searchForm" @search="search"> </banners-search>
+              <banners-types-search ref="searchForm" @search="search"> </banners-types-search>
             </b-col>
           </b-row>
         </div>
@@ -71,7 +71,7 @@ import tableRefreshMixin from "@/mixins/table";
 import notificationMixin from "@/mixins/notification";
 import filtersMixin from "@/mixins/filters";
 import Api from "@/api/v1/banners-types";
-//import BannersSearch from "@/components/banners/BannersSearch";
+import BannersTypesSearch from "@/components/banners-types/BannersTypesSearch";
 //import BannersForm from "@/components/banners/BannersForm";
 import TableActionButtons from "@/components/TableActionButtons";
 
@@ -79,7 +79,7 @@ export default {
   name: "banners-types",
   components: {
     //BannersForm,
-    //BannersSearch,
+    BannersTypesSearch,
     TableActionButtons,
   },
   mixins: [notificationMixin, tableRefreshMixin, filtersMixin],
@@ -95,11 +95,11 @@ export default {
           title: this.$t("bannersTypes.table.title"),
           banner_title: this.$t("bannersTypes.table.banner_title"),
           statusTitle: this.$t("bannersTypes.table.status"),
-          type: this.$t("bannersTypes.table.type"),
+          typeTitle: this.$t("bannersTypes.table.type"),
           sort: this.$t("bannersTypes.table.sort"),
           actions: "",
         },
-        sortable: ["id", "title", "statusTitle", "banner_title", "type", "sort"],
+        sortable: ["id", "title", "statusTitle", "banner_title", "typeTitle", "sort"],
         params: {},
       },
       formModal: {
@@ -112,7 +112,7 @@ export default {
   computed: {
     tableColumns() {
       const actions = ["actions"];
-      return ["id", "title", "banner_title", "type", "sort", "statusTitle", ...actions];
+      return ["id", "title", "banner_title", "typeTitle", "sort", "statusTitle", ...actions];
     },
   },
   methods: {
