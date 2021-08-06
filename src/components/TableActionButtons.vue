@@ -56,7 +56,7 @@ export default {
     },
     editVisible: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     deleteVisible: {
       type: Boolean,

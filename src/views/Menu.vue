@@ -57,13 +57,13 @@
           @ok="handleSave"
           @hidden="resetForm"
         >
-          <pages-form
+          <menu-form
             ref="menuForm"
             :internalId="formModal.id"
             @updated="updated"
             @created="created"
           >
-          </pages-form>
+          </menu-form>
         </b-modal>
       </div>
     </div>
@@ -76,13 +76,13 @@ import notificationMixin from "@/mixins/notification";
 import filtersMixin from "@/mixins/filters";
 import Api from "@/api/v1/menu";
 import MenuSearch from "@/components/menu/MenuSearch";
-//import PagesForm from "@/components/pages/PagesForm";
+import MenuForm from "@/components/menu/MenuForm";
 import TableActionButtons from "@/components/TableActionButtons";
 
 export default {
   name: "menu",
   components: {
-    // PagesForm,
+    MenuForm,
     MenuSearch,
     TableActionButtons,
   },
@@ -141,8 +141,9 @@ export default {
       this.formModal.title = this.$t("menu.update");
     },
     openEditModal(id) {
+      this.formModal.id = id;
       this.formModal.show = true;
-      this.formModal.title = this.$t("menu.add");
+      this.formModal.title = this.$t("menu.list");
     },
     handleSave(event) {
       event.preventDefault();

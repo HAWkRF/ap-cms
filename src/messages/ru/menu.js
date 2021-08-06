@@ -1,7 +1,7 @@
 export default {
-    create: "Добавить",
+    create: "Добавить меню",
     update: "Редактировать",
-    add: "Добавить",
+    list: "Список меню",
 
     page_title: "Блоки меню",
 
