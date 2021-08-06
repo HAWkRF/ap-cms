@@ -19,6 +19,7 @@ import Pages from '../views/Pages'
 import Blocks from '../views/Blocks'
 import Banners from '../views/Banners'
 import BannersTypes from '../views/BannersTypes'
+import OurWorks from '../views/OurWorks'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -230,7 +231,7 @@ const router = new Router({
       meta: {
         requiresAuth: true,
         onlyWorker: true,
-        title: i18n.t('main.meta.pages'),
+        title: i18n.t('main.meta.blocks'),
         layout: 'simple',
       },
       components: {
@@ -264,11 +265,28 @@ const router = new Router({
       meta: {
         requiresAuth: true,
         onlyWorker: true,
-        title: i18n.t('main.meta.banners'),
+        title: i18n.t('main.meta.bannersTypes'),
         layout: 'simple',
       },
       components: {
         default: BannersTypes,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/ourworks',
+      name: 'ourworks',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.ourWorks'),
+        layout: 'simple',
+      },
+      components: {
+        default: OurWorks,
         navbar: SimpleHeader,
         footer: FooterSimple,
         sidebar: Sidebar

@@ -82,6 +82,11 @@
         <span class="micon micon__users"></span>
         <span class="title">{{ $t("main.nav.bannersTypes") }}</span>
         </div>
+        <hr />
+        <div class="item-ap" @click="handleOurWorks">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.ourWorks") }}</span>
+        </div>
     </div>
   </div>
 </template>
@@ -170,6 +175,10 @@ export default {
     },
     handleBannersTypes() {
       this.$router.push({name: "banners-types"});
+      this.collapsedCondition();
+    },
+    handleOurWorks() {
+      this.$router.push({name: "ourworks"});
       this.collapsedCondition();
     },
     collapsedCondition() {
