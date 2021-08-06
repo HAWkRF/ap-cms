@@ -13,6 +13,7 @@ import blocks from './blocks'
 import banners from './banners'
 import bannersTypes from './banners-types'
 import ourWorks from './our-works'
+import menu from './menu'
 
 let systemName = 'AkratoPRIME CMS';
 
@@ -32,6 +33,7 @@ export default {
   banners,
   bannersTypes,
   ourWorks,
+  menu,
 
 
   selected: {
@@ -114,6 +116,7 @@ export default {
       banners: 'Контент. Баннеры',
       bannersTypes: 'Контент. Типы баннеров',
       ourWorks: 'Галерея',
+      menu: 'Меню',
     },
 
     load_img: 'Выбрать файл для загрузки.',
@@ -174,6 +177,7 @@ export default {
       banners: 'Контент. Баннеры',
       bannersTypes: 'Контент. Виды баннеров',
       ourWorks: 'Галерея',
+      menu: 'Меню',
       client: 'Профиль',
       login: 'Вход',
       forgot: 'Забыли пароль',

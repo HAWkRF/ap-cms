@@ -87,6 +87,10 @@
         <span class="micon micon__users"></span>
         <span class="title">{{ $t("main.nav.ourWorks") }}</span>
         </div>
+        <div class="item-ap" @click="handleMenu">
+        <span class="micon micon__users"></span>
+        <span class="title">{{ $t("main.nav.menu") }}</span>
+        </div>
     </div>
   </div>
 </template>
@@ -179,6 +183,10 @@ export default {
     },
     handleOurWorks() {
       this.$router.push({name: "ourworks"});
+      this.collapsedCondition();
+    },
+    handleMenu() {
+      this.$router.push({name: "menu"});
       this.collapsedCondition();
     },
     collapsedCondition() {

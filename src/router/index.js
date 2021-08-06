@@ -20,6 +20,7 @@ import Blocks from '../views/Blocks'
 import Banners from '../views/Banners'
 import BannersTypes from '../views/BannersTypes'
 import OurWorks from '../views/OurWorks'
+import Menu from '../views/Menu'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -292,6 +293,40 @@ const router = new Router({
         sidebar: Sidebar
       },
     },
+
+    {
+      path: '/menu',
+      name: 'menu',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.ourWorks'),
+        layout: 'simple',
+      },
+      components: {
+        default: Menu,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/menu-item-create',
+      name: 'menu',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.ourWorks'), // 
+        layout: 'simple',
+      },
+      components: {
+        default: Menu,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },    
 
     {
       path: '/users',

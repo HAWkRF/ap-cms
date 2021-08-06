@@ -2,6 +2,20 @@
   <div class="float-right">
     <slot name="prependButtons"></slot>
     <b-button
+      v-if="editVisible"
+      size="sm"
+      class="ml-1"
+      variant="outline-secondary"
+      @click.stop="editClick"
+    >
+      <span class="micon micon__menu"> </span>
+
+      <!-- <font-awesome-icon
+                    fixed-width
+                    icon="trash-alt">
+            </font-awesome-icon> -->
+    </b-button>
+    <b-button
       v-if="updateVisible"
       size="sm"
       class="ml-1"
@@ -28,6 +42,7 @@
                     icon="trash-alt">
             </font-awesome-icon> -->
     </b-button>
+
     <slot name="appendButtons"></slot>
   </div>
 </template>
@@ -39,12 +54,19 @@ export default {
       type: Boolean,
       default: true,
     },
+    editVisible: {
+      type: Boolean,
+      default: true,
+    },
     deleteVisible: {
       type: Boolean,
       default: true,
     },
   },
   methods: {
+    editClick() {
+      this.$emit("edit");
+    },
     updateClick() {
       this.$emit("update");
     },

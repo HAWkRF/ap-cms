@@ -478,6 +478,9 @@ label {
       &__delete {
         background-image: str-replace($delete, "color", $white);
       }
+      &__menu {
+        background-image: str-replace($menu, "color", $white);
+      }
     }
   }
 }
