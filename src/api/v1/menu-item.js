@@ -19,9 +19,6 @@ class MenuItemModel extends ApiModel {
   deleteItemId(id) {
     return this.api.delete(`${this.baseUrl}/item/${id}`) // удаление пункта
   }
-
-  
-
 }
 
 export default new MenuItemModel('/menu');

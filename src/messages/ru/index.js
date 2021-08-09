@@ -14,6 +14,7 @@ import banners from './banners'
 import bannersTypes from './banners-types'
 import ourWorks from './our-works'
 import menu from './menu'
+import menuItem from './menu-item'
 
 let systemName = 'AkratoPRIME CMS';
 
@@ -34,6 +35,7 @@ export default {
   bannersTypes,
   ourWorks,
   menu,
+  menuItem,
 
 
   selected: {

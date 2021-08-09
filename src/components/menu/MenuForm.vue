@@ -6,10 +6,15 @@
     @reset="reset"
   >
     <loading :active="loading" :is-full-page="false"> </loading>
+
     <b-form-row>
       <b-col md="12">
         <b-form-group :label="$t('menu.labels.title')" label-for="titleInput">
-          <b-form-input :state="form.isValid('title')" v-model="form.title">
+          <b-form-input
+            id="titleInput"
+            :state="form.isValid('title')"
+            v-model="form.title"
+          >
           </b-form-input>
           <b-form-invalid-feedback
             :style="{ display: !!form.errors.get('title') ? 'block' : 'none' }"
@@ -18,17 +23,17 @@
         </b-form-group>
       </b-col>
     </b-form-row>
-
     <b-form-row>
-      <b-col md="12">
-        <b-form-group :label="$t('menu.labels.status')" label-for="statusInput">
+      <b-col md="6">
+        <b-form-group :label="$t('menu.labels.alias')" label-for="aliasInput">
           <multiselect
-            v-model="statusSelect"
+            id="aliasInput"
+            v-model="aliasIdSelect"
             track-by="id"
             label="title"
             :placeholder="$t('main.pickAValue')"
-            :options="statuses"
-            :searchable="false"
+            :options="aliases"
+            :searchable="true"
             :allow-empty="false"
             v-bind="selectOptions"
           >
@@ -36,6 +41,34 @@
               option.title
             }}</template>
           </multiselect>
+
+          <b-form-invalid-feedback
+            :style="{ display: !!form.errors.get('alias') ? 'block' : 'none' }"
+            v-text="form.errors.get('alias')"
+          ></b-form-invalid-feedback>
+        </b-form-group>
+      </b-col>
+    </b-form-row>
+
+    <b-form-row>
+      <b-col md="6">
+        <b-form-group :label="$t('menu.labels.status')" label-for="statusInput">
+          <multiselect
+            id="statusInput"
+            v-model="statusIdSelect"
+            track-by="id"
+            label="title"
+            :placeholder="$t('main.pickAValue')"
+            :options="statuses"
+            :searchable="true"
+            :allow-empty="false"
+            v-bind="selectOptions"
+          >
+            <template slot="singleLabel" slot-scope="{ option }">{{
+              option.title
+            }}</template>
+          </multiselect>
+
           <b-form-invalid-feedback
             :style="{ display: !!form.errors.get('status') ? 'block' : 'none' }"
             v-text="form.errors.get('status')"
@@ -48,24 +81,40 @@
 
 <script>
 import Form from "@/utils/Form";
-import Api from "@/api/v1/vacancy";
+import Api from "@/api/v1/menu";
 import Multiselect from "vue-multiselect";
 
 export default {
-  components: {
-    Multiselect,
-  },
   props: {
     internalId: {
       default: null,
     },
   },
+  components: {
+    Multiselect,
+  },
+  watch: {
+    statusIdSelect(value) {
+      if (value !== undefined) {
+        this.form.status = value.id;
+      }
+    },
+    aliasIdSelect(value) {
+      if (value !== undefined) {
+        this.form.alias = value.id;
+      }
+    },
+  },
   data: function () {
     return {
       loading: false,
+      isSeoFieldsShown: false,
 
       statuses: [],
-      statusSelect: null,
+      statusIdSelect: null,
+      aliases: [],
+      aliasIdSelect: null,
+
       selectOptions: {
         multiple: false,
         showNoOptions: false,
@@ -73,34 +122,30 @@ export default {
         selectLabel: "",
         selectedLabel: "",
         deselectLabel: "",
-        openDirection: "bottom",
       },
 
       form: new Form({
         id: null,
         title: "",
-        status: "",
+        status: 0,
+        alias: "",
       }),
     };
-  },
-  watch: {
-    statusSelect(newValue) {
-      if (newValue !== undefined) {
-        this.form.status = newValue.id;
-      }
-    },
   },
   methods: {
     async load(id) {
       const response = await Api.getModel(id);
       this.form.load(response.data);
-      this.statusSelect = this.statuses.find(
-        (x) => String(x.id) === String(this.form.status)
-      );
+      this.form.id = id;
+
+      this.statusIdSelect = this.statuses.find((x) => x.id === this.form.status);
+
+      this.aliasIdSelect = this.aliases.find((x) => x.id === this.form.alias);
     },
-    async filtersLoad() {
+    async loadFilters() {
       const response = await Api.getFilters();
       this.statuses = response.data.statuses;
+      this.aliases = response.data.aliases;
     },
     async submit() {
       try {
@@ -122,12 +167,9 @@ export default {
   },
   async created() {
     this.loading = true;
-    await this.filtersLoad();
+    await this.loadFilters();
     if (this.internalId) {
       await this.load(this.internalId);
-    } else {
-      this.isNewForm = true;
-      this.statusSelect = this.statuses[0];
     }
     this.loading = false;
   },

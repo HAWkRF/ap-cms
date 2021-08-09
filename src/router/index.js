@@ -21,6 +21,7 @@ import Banners from '../views/Banners'
 import BannersTypes from '../views/BannersTypes'
 import OurWorks from '../views/OurWorks'
 import Menu from '../views/Menu'
+import MenuItem from '../views/MenuItem'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -311,22 +312,24 @@ const router = new Router({
       },
     },
 
+
     {
-      path: '/menu-item-create',
-      name: 'menu',
+      path: '/menu-item/:id',
+      name: 'menu-item',
       meta: {
         requiresAuth: true,
         onlyWorker: true,
-        title: i18n.t('main.meta.ourWorks'), // 
+        title: i18n.t('main.meta.ourWorks'), //поменять
         layout: 'simple',
       },
       components: {
-        default: Menu,
+        default: MenuItem,
         navbar: SimpleHeader,
         footer: FooterSimple,
         sidebar: Sidebar
       },
-    },    
+    },
+
 
     {
       path: '/users',

@@ -6,7 +6,7 @@
           <b-form-input
             type="search"
             v-model="search.id"
-            :placeholder="$t('menu.search.id')"
+            :placeholder="$t('menuItem.search.id')"
           >
           </b-form-input>
         </b-form-group>
@@ -16,7 +16,7 @@
           <b-form-input
             type="search"
             v-model="search.title"
-            :placeholder="$t('menu.search.title')"
+            :placeholder="$t('menuItem.search.title')"
           >
           </b-form-input>
         </b-input-group>
@@ -50,7 +50,7 @@
           v-model="searchStatus"
           track-by="id"
           label="title"
-          :placeholder="$t('menu.search.status')"
+          :placeholder="$t('menuItem.search.status')"
           :options="statuses"
           :searchable="true"
           :allow-empty="true"
@@ -73,7 +73,7 @@
 
 <script>
 import Multiselect from "vue-multiselect";
-import Api from "@/api/v1/menu";
+import Api from "@/api/v1/menu-item";
 
 export default {
   components: {
@@ -86,14 +86,11 @@ export default {
       statuses: [],
       searchStatus: null,
       status: "",
-      aliases: [],
-      searchAlias: null,
-      alias: "",
       search: {
         status: "",
         title: "",
         id: "",
-        alias: "",
+        parent_id: "",
       },
       selectOptions: {
         multiple: false,
@@ -112,7 +109,6 @@ export default {
       this.loaded = true;
       const response = await Api.getFilters();
       this.statuses = response.data.statuses;
-      this.aliases = response.data.aliases;
     },
     clearField(field, searhField) {
       this.search[field] = "";
@@ -125,9 +121,9 @@ export default {
         this.search.status = newValue.id;
       }
     },
-    searchAlias(newValue) {
+    searchParent(newValue) {
       if (newValue !== null && newValue !== undefined) {
-        this.search.alias = newValue.id;
+        this.search.parent_id = newValue.id;
       }
     },
     search: {
