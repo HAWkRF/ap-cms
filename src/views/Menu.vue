@@ -142,7 +142,8 @@ export default {
     },
     openEditModal(id) {
       this.formModal.id = id;
-      this.formModal.show = true;
+      this.$router.push({ name: "menu-item", params: { id: id } });
+      this.formModal.show = false;
       this.formModal.title = this.$t("menu.list");
     },
     handleSave(event) {

@@ -87,7 +87,7 @@ export default {
       searchStatus: null,
       status: "",
       menuItems: [],
-      parent_id: "",
+      parent_id: null,
       searchParent: null,
       search: {
         status: "",

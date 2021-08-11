@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row-ap">
       <div class="col-12">
-        <h1>{{ $t("menuItem.page_title") }}</h1>
+        <h1>{{ $t("menuItem.page_title") + ` ` }}</h1>
           <div class="search-form">
             <b-row>
               <b-col order-lg="2" lg="auto">
@@ -88,6 +88,7 @@ export default {
   data() {
     return {
       isCreate: null,
+      //apiUrl: Api.baseUrl + `/item-index/${this.$route.params.id}`,
       apiUrl: Api.baseUrl + `/item-index/${this.$route.params.id}`,
       baseUrl: process.env.VUE_APP_API,
       img_size: "?w=80&h=80",
@@ -102,7 +103,7 @@ export default {
           status_title: this.$t("menuItem.table.status"),
           actions: "",
         },
-        sortable: ["id", "title", "parent_tile", "sort", "status"],
+        sortable: ["id", "title", "parent_tile", "sort", "status_title"],
         params: {},
       },
       formModal: {

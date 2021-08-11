@@ -3,7 +3,7 @@ export default {
     update: "Редактировать",
 
 
-    page_title: "Редактирование пунктов меню:",
+    page_title: "Редактирование пунктов меню",
     page_title_create: "Создание меню",
 
 
@@ -27,6 +27,10 @@ export default {
         sort: "Сортировка",
         in_new_window: "Открывать",
         image: "Изображение",
+        typeNews: 'Статья',
+        mainNews: 'Категория',
+        typePages: 'Страница',
+        typeCategories: 'Категория',
       },
     
     search: {

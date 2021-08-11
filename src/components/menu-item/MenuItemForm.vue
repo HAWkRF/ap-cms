@@ -65,30 +65,13 @@
       </b-form-row>
     </template>
 
-    <template v-if="form.type !== typeUr">
-      <b-form-row>
-        <b-col md="12">
-          <b-form-group label-for="sourceTitleInput">
-            <b-form-input
-              :state="form.isValid('source_title')"
-              v-model="form.source_title"
-            >
-            </b-form-input>
-            <b-form-invalid-feedback
-              v-text="form.errors.get('source_title')"
-            ></b-form-invalid-feedback>
-          </b-form-group>
-        </b-col>
-      </b-form-row>
-    </template>
-
     <template v-if="form.type == typeMainNews">
       <b-form-row>
         <b-col md="6">
           <b-form-group :label="$t('menuItem.labels.mainNews')" label-for="mainNewsInput">
             <multiselect
               id="mainNewsInput"
-              v-model="searchMainNews"
+              v-model="selectMainNews"
               track-by="id"
               label="title"
               @search-change="loadMainNews"
@@ -104,8 +87,8 @@
             </multiselect>
 
             <b-form-invalid-feedback
-              :style="{ display: !!form.errors.get('mainNews') ? 'block' : 'none' }"
-              v-text="form.errors.get('mainNews')"
+              :style="{ display: !!form.errors.get('source_id') ? 'block' : 'none' }"
+              v-text="form.errors.get('source_id')"
             ></b-form-invalid-feedback>
           </b-form-group>
         </b-col>
@@ -118,7 +101,7 @@
           <b-form-group :label="$t('menuItem.labels.typeNews')" label-for="NewsInput">
             <multiselect
               id="NewsInput"
-              v-model="searchNews"
+              v-model="selectNews"
               track-by="id"
               label="title"
               @search-change="loadNews"
@@ -134,8 +117,8 @@
             </multiselect>
 
             <b-form-invalid-feedback
-              :style="{ display: !!form.errors.get('news') ? 'block' : 'none' }"
-              v-text="form.errors.get('news')"
+              :style="{ display: !!form.errors.get('source_id') ? 'block' : 'none' }"
+              v-text="form.errors.get('source_id')"
             ></b-form-invalid-feedback>
           </b-form-group>
         </b-col>
@@ -148,7 +131,7 @@
           <b-form-group :label="$t('menuItem.labels.typePages')" label-for="PagesInput">
             <multiselect
               id="PagesInput"
-              v-model="searchPages"
+              v-model="selectPages"
               track-by="id"
               label="title"
               @search-change="loadPages"
@@ -164,8 +147,38 @@
             </multiselect>
 
             <b-form-invalid-feedback
-              :style="{ display: !!form.errors.get('pages') ? 'block' : 'none' }"
-              v-text="form.errors.get('pages')"
+              :style="{ display: !!form.errors.get('source_id') ? 'block' : 'none' }"
+              v-text="form.errors.get('source_id')"
+            ></b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+      </b-form-row>
+    </template>
+
+    <template v-if="form.type == typeCategories">
+      <b-form-row>
+        <b-col md="6">
+          <b-form-group :label="$t('menuItem.labels.typeCategories')" label-for="CategoriesInput">
+            <multiselect
+              id="CategoriesInput"
+              v-model="selectCategories"
+              track-by="id"
+              label="title"
+              @search-change="loadCategories"
+              :placeholder="$t('main.pickAValue')"
+              :options="categories"
+              :searchable="true"
+              :allow-empty="false"
+              v-bind="selectOptions"
+            >
+              <template slot="singleLabel" slot-scope="{ option }">{{
+                option.title
+              }}</template>
+            </multiselect>
+
+            <b-form-invalid-feedback
+              :style="{ display: !!form.errors.get('source_id') ? 'block' : 'none' }"
+              v-text="form.errors.get('source_id')"
             ></b-form-invalid-feedback>
           </b-form-group>
         </b-col>
@@ -300,6 +313,7 @@ import Api from "@/api/v1/menu-item";
 import ApiMainNews from "@/api/v1/main-news";
 import ApiNews from "@/api/v1/news";
 import ApiPages from "@/api/v1/pages";
+import ApiCategories from "@/api/v1/categories-goods";
 import Multiselect from "vue-multiselect";
 import {
   typeUr,
@@ -328,20 +342,6 @@ export default {
       if (newValue !== undefined) {
         this.form.type = newValue.id;
       }
-      /* if (this.form.type == typeUrl) {
-          this.isDisabledSourceUrl = false;
-          this.isDisabledMult = true;
-        }
-        if(this.form.type == typeMainNews) {
-          this.isDisabledSourceUrl = true;
-          //this.isDisabledMult = false;
-        }
-        if(this.form.type == typeNews) {
-          this.isDisabledSourceUrl = true;
-          //this.isDisabledMult = false;
-        }
-
-      } */
     },
     newWindowSelect(value) {
       if (value !== undefined) {
@@ -353,19 +353,24 @@ export default {
         this.form.parent_id = newValue.id;
       }
     },
-    searchMainNews(value) {
-      if (value !== null && value != "") {
-        this.form.mainNew = value;
+    selectMainNews(value) {
+      if (value !== null && value !== "" && value !== undefined) {
+        this.form.source_id = value.id;
       }
     },
-    searchNews(value) {
-      if (value !== null && value != "") {
-        this.form.news = value;
+    selectNews(value) {
+      if (value !== null && value !== "" && value !== undefined) {
+        this.form.source_id = value.id;
       }
     },
-    searchPages(value) {
-      if (value !== null && value != "") {
-        this.form.pages = value;
+    selectPages(value) {
+      if (value !== null && value !== "" && value !== undefined) {
+        this.form.source_id = value.id;
+      }
+    },
+    selectCategories(value) {
+      if (value !== null && value !== "" && value !== undefined) {
+        this.form.source_id = value.id;
       }
     },
   },
@@ -377,13 +382,12 @@ export default {
       typePage: Object.freeze(typePage),
       typeCategories: Object.freeze(typeCategories),
 
-      searchMainNews: [],
-      searchNews: [],
-      searchPages: [],
+      selectMainNews: [],
+      selectNews: [],
+      selectPages: [],
+      selectCategories: [],
 
       loading: false,
-      isDisabledSourceUrl: true,
-      isDisabledMult: true,
 
       statuses: [],
       statusIdSelect: null,
@@ -422,12 +426,9 @@ export default {
         source_id: null,
         menu_id: Number.parseInt(this.$route.params.id),
         parent_id: null,
-        in_new_window: "",
+        in_new_window: null,
         image: "",
         content: "",
-        mainNew: "",
-        news: "",
-        pages: "",
       }),
     };
   },
@@ -436,11 +437,10 @@ export default {
       (this.Form.image = content), (this.form.image = content.src);
     },
     async load(id) {
-      //const response = await Api.getModel(id);
       const response = await Api.getItemId(id);
       this.form.load(response.data);
       this.form.id = id;
-      
+
       this.loadFilters();
 
       this.statusIdSelect = this.statuses.find((x) => x.id === this.form.status);
@@ -449,7 +449,6 @@ export default {
         (x) => x.id === this.form.in_new_window
       );
       this.searchParent = this.menuItems.find((x) => x.id === this.form.parent_id);
-  
     },
     async loadFilters() {
       const response = await Api.getFilters(this.$route.params.id);
@@ -461,12 +460,10 @@ export default {
     async submit() {
       try {
         if (this.form.id) {
-          //await Api.updateModel(this.form.id, this.form.data);
-            await Api.putMenuItem(this.form.id, this.form.data);
+          await Api.putMenuItem(this.form.id, this.form.data);
           this.$emit("updated");
         } else {
-           //await Api.createModel(this.form.data);
-             await Api.postItem(this.form.data);
+          await Api.postItem(this.form.data);
           this.$emit("created");
         }
         this.form.onSuccess();
@@ -478,7 +475,7 @@ export default {
       this.form.reset();
     },
     async loadMainNews(params) {
-      if (params.trim() !== "") {
+      if (params !== "") {
         const response = await ApiMainNews.getMainNews({
           title: params.trim(),
         });
@@ -486,7 +483,7 @@ export default {
       }
     },
     async loadNews(params) {
-      if (params.trim() !== "") {
+      if (params !== "") {
         const response = await ApiNews.getNews({
           title: params.trim(),
         });
@@ -494,14 +491,21 @@ export default {
       }
     },
     async loadPages(params) {
-      if (params.trim() !== "") {
+      if (params !== "") {
         const response = await ApiPages.getPages({
           title: params.trim(),
         });
         this.pages = response.data;
       }
     },
-    async loadCategories() {},
+    async loadCategories(params) {
+      if (params !== "") {
+        const response = await ApiCategories.getCategoriesName({
+          title: params.trim(),
+        });
+        this.categories = response.data;
+      }
+    },
   },
   async created() {
     this.loading = true;
