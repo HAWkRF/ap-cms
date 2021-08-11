@@ -4,6 +4,10 @@ class PagesModel extends ApiModel {
   getFilters(params) {
     return this.api.get(`${this.baseUrl}/filters`, params);
   }
+
+  getPages(params) {
+    return this.api.get(`${this.baseUrl}`, params);
+  }
 }
 
 export default new PagesModel('/pages');

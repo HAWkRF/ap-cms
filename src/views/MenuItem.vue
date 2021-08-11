@@ -74,13 +74,13 @@ import notificationMixin from "@/mixins/notification";
 import filtersMixin from "@/mixins/filters";
 import Api from "@/api/v1/menu-item";
 import MenuItemSearch from "@/components/menu-item/MenuItemSearch";
-//import MenuForm from "@/components/menu/MenuForm";
+import MenuItemForm from "@/components/menu-item/MenuItemForm";
 import TableActionButtons from "@/components/TableActionButtons";
 
 export default {
   name: "menu-item",
   components: {
-    //MenuForm,
+    MenuItemForm,
     MenuItemSearch,
     TableActionButtons,
   },
@@ -97,12 +97,12 @@ export default {
           id: this.$t("menuItem.table.id"),
           title: this.$t("menuItem.table.title"),
           image: this.$t("menuItem.table.image"),
-          parent_id: this.$t("menuItem.table.parent_id"),
+          parent_title: this.$t("menuItem.table.parent_id"),
           sort: this.$t("menuItem.table.sort"),
-          status: this.$t("menuItem.table.status"),
+          status_title: this.$t("menuItem.table.status"),
           actions: "",
         },
-        sortable: ["id", "title", "parent_id", "sort", "status"],
+        sortable: ["id", "title", "parent_tile", "sort", "status"],
         params: {},
       },
       formModal: {
@@ -121,13 +121,14 @@ export default {
   computed: {
     tableColumns() {
       const actions = ["actions"];
-      return ["id", "title", "image", "parent_id", "sort", "status", ...actions];
+      return ["id", "title", "image", "parent_title", "sort", "status_title", ...actions];
     },
   },
   methods: {
     async getMenuItems() {
-        const response = await Api.getItemId(this.$route.params.id);
-        //const responseFilter = await Api.getFilters();
+        //const responseFilter = await Api.getFilters(this.$route.params.id);
+        //const response = await Api.getItemId(this.$route.params.id);
+        
     },
     searchRefresh() {
       this.$refs.searchForm.fetchFilters();

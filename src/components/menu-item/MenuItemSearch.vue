@@ -24,11 +24,11 @@
 
       <b-col>
         <multiselect
-          v-model="searchAlias"
+          v-model="searchParent"
           track-by="id"
           label="title"
-          :placeholder="$t('menu.search.alias')"
-          :options="aliases"
+          :placeholder="$t('menuItem.search.parent_id')"
+          :options="menuItems"
           :searchable="true"
           :allow-empty="true"
           v-bind="selectOptions"
@@ -36,8 +36,8 @@
           <template slot="clear">
             <div
               class="multiselect__clear"
-              v-if="search.alias !== ''"
-              @mousedown.prevent.stop="clearField('alias', 'searchAlias')"
+              v-if="search.parent_id !== ''"
+              @mousedown.prevent.stop="clearField('parent_id', 'searchParent')"
             >
               <font-awesome-icon icon="times"></font-awesome-icon>
             </div>
@@ -86,6 +86,9 @@ export default {
       statuses: [],
       searchStatus: null,
       status: "",
+      menuItems: [],
+      parent_id: "",
+      searchParent: null,
       search: {
         status: "",
         title: "",
@@ -107,8 +110,9 @@ export default {
   methods: {
     async fetchFilters() {
       this.loaded = true;
-      const response = await Api.getFilters();
+      const response = await Api.getFilters(this.$route.params.id);
       this.statuses = response.data.statuses;
+      this.menuItems = response.data.menuItems;
     },
     clearField(field, searhField) {
       this.search[field] = "";

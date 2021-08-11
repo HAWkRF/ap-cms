@@ -1,0 +1,16 @@
+GET http://hmapi.detskie-sady.com/news?title=хром
+Accept: application/json;
+Content-Type: application/json
+Authorization: Bearer QC9SZtQErSLhxC9RHWfD465u7yLDXTh7
+
+### - actionCreate
+
+POST http://hmapi.detskie-sady.com/pages
+Accept: application/json;
+Content-Type: application/json
+Authorization: Bearer Ucg9LC6Ua08o0jf_mxjR_M4h0YdqdbX5
+
+{
+  "title": "TEST2",
+  "content": ""
+}

@@ -3,14 +3,15 @@ export default {
     update: "Редактировать",
 
 
-    page_title: "Редактирование меню:",
+    page_title: "Редактирование пунктов меню:",
     page_title_create: "Создание меню",
+
 
     table: {
         id: "id",
         image: "Изображение",
         sort: "Сортировка",
-        parent_id: "Родительская категория",
+        parent_id: "Родительский пункт",
         status: "Статус",
         alias: "Тип меню",
         title: "Название",
@@ -18,7 +19,7 @@ export default {
 
    labels: {
         title: "Название",
-        alias: "Тип меню",
+        type: "Тип меню",
         status: "Статус",
         source_url: "Ссылка",
         source_title: "Название ссылки",
@@ -30,9 +31,9 @@ export default {
     
     search: {
         id: "id",
-        alias: "Тип меню",
         status: "Статус",
         title: "Название",
+        parent_id: "Родительский пункт",
       },
 
 }

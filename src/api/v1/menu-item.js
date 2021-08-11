@@ -1,14 +1,14 @@
 import ApiModel from '../ApiModel'
 
 class MenuItemModel extends ApiModel {
-  getFilters(params) {
-    return this.api.get(`${this.baseUrl}/item/filters`, params); // фильтры
+  getFilters(id) {
+    return this.api.get(`${this.baseUrl}/item/filters/${id}`); // фильтры
   }
   getMenusId(id) {
       return this.api.get(`${this.baseUrl}/item/item-index/${id}`) // все пункты меню по ID меню
   }
   getItemId(id) {
-      return this.api.get(`${this.baseUrl}/item/${id}`) // просмотр пункта
+      return this.api.get(`${this.baseUrl}/item/${id}`) // просмотр пункта меню
   }
   postItem() {
       return this.api.post(`${this.baseUrl}/item`) // добавление пункта
@@ -20,5 +20,7 @@ class MenuItemModel extends ApiModel {
     return this.api.delete(`${this.baseUrl}/item/${id}`) // удаление пункта
   }
 }
+
+
 
 export default new MenuItemModel('/menu');
