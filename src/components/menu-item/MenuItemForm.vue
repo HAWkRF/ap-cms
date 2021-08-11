@@ -51,7 +51,7 @@
       </b-col>
     </b-form-row>
 
-    <template v-if="form.type == typeUrl">
+    <template v-if="form.type == typeUr">
       <b-form-row>
         <b-col md="12">
           <b-form-group label-for="sourceUrlInput">
@@ -65,13 +65,12 @@
       </b-form-row>
     </template>
 
-    <template v-if="form.type != typeUrl">
+    <template v-if="form.type !== typeUr">
       <b-form-row>
         <b-col md="12">
           <b-form-group label-for="sourceTitleInput">
             <b-form-input
               :state="form.isValid('source_title')"
-              :disabled="isDisabledSourceUrl"
               v-model="form.source_title"
             >
             </b-form-input>
@@ -83,91 +82,95 @@
       </b-form-row>
     </template>
 
-    <b-form-row>
-      <b-col md="6">
-        <b-form-group :label="$t('menuItem.labels.mainNews')" label-for="mainNewsInput">
-          <multiselect
-            id="mainNewsInput"
-            v-model="searchMainNews"
-            track-by="id"
-            label="title"
-            @search-change="loadMainNews"
-            :disabled="isDisabledMult"
-            :placeholder="$t('main.pickAValue')"
-            :options="mainNews"
-            :searchable="true"
-            :allow-empty="false"
-            v-bind="selectOptions"
-          >
-            <template slot="singleLabel" slot-scope="{ option }">{{
-              option.title
-            }}</template>
-          </multiselect>
+    <template v-if="form.type == typeMainNews">
+      <b-form-row>
+        <b-col md="6">
+          <b-form-group :label="$t('menuItem.labels.mainNews')" label-for="mainNewsInput">
+            <multiselect
+              id="mainNewsInput"
+              v-model="searchMainNews"
+              track-by="id"
+              label="title"
+              @search-change="loadMainNews"
+              :placeholder="$t('main.pickAValue')"
+              :options="mainNews"
+              :searchable="true"
+              :allow-empty="false"
+              v-bind="selectOptions"
+            >
+              <template slot="singleLabel" slot-scope="{ option }">{{
+                option.title
+              }}</template>
+            </multiselect>
 
-          <b-form-invalid-feedback
-            :style="{ display: !!form.errors.get('mainNews') ? 'block' : 'none' }"
-            v-text="form.errors.get('mainNews')"
-          ></b-form-invalid-feedback>
-        </b-form-group>
-      </b-col>
-    </b-form-row>
+            <b-form-invalid-feedback
+              :style="{ display: !!form.errors.get('mainNews') ? 'block' : 'none' }"
+              v-text="form.errors.get('mainNews')"
+            ></b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+      </b-form-row>
+    </template>
 
-    <b-form-row>
-      <b-col md="6">
-        <b-form-group :label="$t('menuItem.labels.typeNews')" label-for="NewsInput">
-          <multiselect
-            id="NewsInput"
-            v-model="searchNews"
-            track-by="id"
-            label="title"
-            @search-change="loadNews"
-            :placeholder="$t('main.pickAValue')"
-            :options="news"
-            :searchable="true"
-            :allow-empty="false"
-            v-bind="selectOptions"
-          >
-            <template slot="singleLabel" slot-scope="{ option }">{{
-              option.title
-            }}</template>
-          </multiselect>
+    <template v-if="form.type == typeNews">
+      <b-form-row>
+        <b-col md="6">
+          <b-form-group :label="$t('menuItem.labels.typeNews')" label-for="NewsInput">
+            <multiselect
+              id="NewsInput"
+              v-model="searchNews"
+              track-by="id"
+              label="title"
+              @search-change="loadNews"
+              :placeholder="$t('main.pickAValue')"
+              :options="news"
+              :searchable="true"
+              :allow-empty="false"
+              v-bind="selectOptions"
+            >
+              <template slot="singleLabel" slot-scope="{ option }">{{
+                option.title
+              }}</template>
+            </multiselect>
 
-          <b-form-invalid-feedback
-            :style="{ display: !!form.errors.get('news') ? 'block' : 'none' }"
-            v-text="form.errors.get('news')"
-          ></b-form-invalid-feedback>
-        </b-form-group>
-      </b-col>
-    </b-form-row>
+            <b-form-invalid-feedback
+              :style="{ display: !!form.errors.get('news') ? 'block' : 'none' }"
+              v-text="form.errors.get('news')"
+            ></b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+      </b-form-row>
+    </template>
 
+    <template v-if="form.type == typePage">
+      <b-form-row>
+        <b-col md="6">
+          <b-form-group :label="$t('menuItem.labels.typePages')" label-for="PagesInput">
+            <multiselect
+              id="PagesInput"
+              v-model="searchPages"
+              track-by="id"
+              label="title"
+              @search-change="loadPages"
+              :placeholder="$t('main.pickAValue')"
+              :options="pages"
+              :searchable="true"
+              :allow-empty="false"
+              v-bind="selectOptions"
+            >
+              <template slot="singleLabel" slot-scope="{ option }">{{
+                option.title
+              }}</template>
+            </multiselect>
 
-        <b-form-row>
-      <b-col md="6">
-        <b-form-group :label="$t('menuItem.labels.typePages')" label-for="PagesInput">
-          <multiselect
-            id="PagesInput"
-            v-model="searchPages"
-            track-by="id"
-            label="title"
-            @search-change="loadPages"
-            :placeholder="$t('main.pickAValue')"
-            :options="pages"
-            :searchable="true"
-            :allow-empty="false"
-            v-bind="selectOptions"
-          >
-            <template slot="singleLabel" slot-scope="{ option }">{{
-              option.title
-            }}</template>
-          </multiselect>
-
-          <b-form-invalid-feedback
-            :style="{ display: !!form.errors.get('pages') ? 'block' : 'none' }"
-            v-text="form.errors.get('pages')"
-          ></b-form-invalid-feedback>
-        </b-form-group>
-      </b-col>
-    </b-form-row>
+            <b-form-invalid-feedback
+              :style="{ display: !!form.errors.get('pages') ? 'block' : 'none' }"
+              v-text="form.errors.get('pages')"
+            ></b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+      </b-form-row>
+    </template>
 
     <b-form-row>
       <b-col md="6">
@@ -298,7 +301,13 @@ import ApiMainNews from "@/api/v1/main-news";
 import ApiNews from "@/api/v1/news";
 import ApiPages from "@/api/v1/pages";
 import Multiselect from "vue-multiselect";
-import { typeUrl, typeMainNews, typeNews, typePage, typeCategories } from "@/utils/formTypes";
+import {
+  typeUr,
+  typeMainNews,
+  typeNews,
+  typePage,
+  typeCategories,
+} from "@/utils/formTypes";
 
 export default {
   props: {
@@ -319,7 +328,7 @@ export default {
       if (value !== undefined) {
         this.form.type = value.id;
       }
-       /* if (this.form.type == typeUrl) {
+      /* if (this.form.type == typeUrl) {
           this.isDisabledSourceUrl = false;
           this.isDisabledMult = true;
         }
@@ -358,10 +367,20 @@ export default {
       if (value !== null && value != "") {
         this.form.pages = value;
       }
-    }
+    },
   },
   data: function () {
     return {
+      typeUr: Object.freeze(typeUr),
+      typeMainNews: Object.freeze(typeMainNews),
+      typeNews: Object.freeze(typeNews),
+      typePage: Object.freeze(typePage),
+      typeCategories: Object.freeze(typeCategories),
+
+      searchMainNews: [],
+      searchNews: [],
+      searchPages: [],
+
       loading: false,
       isDisabledSourceUrl: true,
       isDisabledMult: true,
