@@ -324,9 +324,9 @@ export default {
         this.form.status = value.id;
       }
     },
-    typeIdSelect(value) {
-      if (value !== undefined) {
-        this.form.type = value.id;
+    typeIdSelect(newValue) {
+      if (newValue !== undefined) {
+        this.form.type = newValue.id;
       }
       /* if (this.form.type == typeUrl) {
           this.isDisabledSourceUrl = false;
@@ -350,7 +350,7 @@ export default {
     },
     searchParent(newValue) {
       if (newValue !== null && newValue !== undefined) {
-        this.search.parent_id = newValue.id;
+        this.form.parent_id = newValue.id;
       }
     },
     searchMainNews(value) {
@@ -395,7 +395,6 @@ export default {
       newWindowSelect: null,
 
       menuItems: [],
-      parent_id: "",
       searchParent: null,
 
       mainNews: [],
@@ -416,13 +415,13 @@ export default {
         id: null,
         title: "",
         status: 0,
-        type: 0,
+        type: null,
         sort: 0,
         source_url: "",
         source_title: "",
-        source_id: "",
-        menu_id: "",
-        parent_id: "",
+        source_id: null,
+        menu_id: Number.parseInt(this.$route.params.id),
+        parent_id: null,
         in_new_window: "",
         image: "",
         content: "",
@@ -437,9 +436,12 @@ export default {
       (this.Form.image = content), (this.form.image = content.src);
     },
     async load(id) {
-      const response = await Api.getModel(id);
+      //const response = await Api.getModel(id);
+      const response = await Api.getItemId(id);
       this.form.load(response.data);
       this.form.id = id;
+      
+      this.loadFilters();
 
       this.statusIdSelect = this.statuses.find((x) => x.id === this.form.status);
       this.typeIdSelect = this.types.find((x) => x.id === this.form.type);
@@ -447,6 +449,7 @@ export default {
         (x) => x.id === this.form.in_new_window
       );
       this.searchParent = this.menuItems.find((x) => x.id === this.form.parent_id);
+  
     },
     async loadFilters() {
       const response = await Api.getFilters(this.$route.params.id);
@@ -458,10 +461,12 @@ export default {
     async submit() {
       try {
         if (this.form.id) {
-          await Api.updateModel(this.form.id, this.form.data);
+          //await Api.updateModel(this.form.id, this.form.data);
+            await Api.putMenuItem(this.form.id, this.form.data);
           this.$emit("updated");
         } else {
-          await Api.createModel(this.form.data);
+           //await Api.createModel(this.form.data);
+             await Api.postItem(this.form.data);
           this.$emit("created");
         }
         this.form.onSuccess();

@@ -314,7 +314,8 @@ const router = new Router({
 
 
     {
-      path: '/menu-item/:id',
+      //path: '/menu-item/:id',
+      path: '/menu/item/:id',
       name: 'menu-item',
       meta: {
         requiresAuth: true,

@@ -115,7 +115,7 @@ export default {
   created() {
     this.$route.params.id ? (this.isCreate = true) : (this.isCreate = false);
     if (this.isCreate) {
-      this.getMenuItems();
+     // this.getMenuItems();
     }
   },
   computed: {

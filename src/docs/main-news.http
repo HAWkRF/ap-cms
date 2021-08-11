@@ -14,3 +14,21 @@ Authorization: Bearer Ucg9LC6Ua08o0jf_mxjR_M4h0YdqdbX5
   "title": "TEST2",
   "content": ""
 }
+
+
+###
+POST http://hmapi.detskie-sady.com/menu/item
+Accept: application/json;
+Content-Type: application/json
+Authorization: Bearer CTHNWzC7A9jb6dhGbVYB2QlVT2bxp5BW
+
+{"id":null,"title":"gdgdg","status":1,"type":0,"sort":0,"source_url":"hgdhhdh","source_title":"","source_id":"","menu_id":null,"parent_id":null,"in_new_window":0,"image":"","content":"","mainNew":"","news":"","pages":""}
+
+
+###
+POST http://hmapi.detskie-sady.com/menu/item
+Accept: application/json;
+Content-Type: application/json
+Authorization: Bearer CTHNWzC7A9jb6dhGbVYB2QlVT2bxp5BW
+
+{"id":null,"title":"","status":0,"type":null,"sort":0,"source_url":"","source_title":"","source_id":"","menu_id":11,"parent_id":0,"in_new_window":"","image":"","content":"","mainNew":"","news":"","pages":""}

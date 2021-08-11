@@ -10,17 +10,16 @@ class MenuItemModel extends ApiModel {
   getItemId(id) {
       return this.api.get(`${this.baseUrl}/item/${id}`) // просмотр пункта меню
   }
-  postItem() {
-      return this.api.post(`${this.baseUrl}/item`) // добавление пункта
+  postItem(data) {
+      return this.api.post(`${this.baseUrl}/item`, data) // добавление пункта
   }
-  putMenuItem(id) {
-    return this.api.put(`${this.baseUrl}/item/${id}`); // редактирование пункта
+  putMenuItem(id, data) {
+    return this.api.put(`${this.baseUrl}/item/${id}`, data); // редактирование пункта
   }
   deleteItemId(id) {
     return this.api.delete(`${this.baseUrl}/item/${id}`) // удаление пункта
   }
 }
-
 
 
 export default new MenuItemModel('/menu');
