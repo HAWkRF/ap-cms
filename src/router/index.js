@@ -314,13 +314,12 @@ const router = new Router({
 
 
     {
-      //path: '/menu-item/:id',
       path: '/menu/item/:id',
       name: 'menu-item',
       meta: {
         requiresAuth: true,
         onlyWorker: true,
-        title: i18n.t('main.meta.ourWorks'), //поменять
+        title: i18n.t('main.meta.menuItem'),
         layout: 'simple',
       },
       components: {

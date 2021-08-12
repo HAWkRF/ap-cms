@@ -180,6 +180,7 @@ export default {
       bannersTypes: 'Контент. Виды баннеров',
       ourWorks: 'Галерея',
       menu: 'Меню',
+      menuItem: 'Редактирование пункта меню',
       client: 'Профиль',
       login: 'Вход',
       forgot: 'Забыли пароль',
