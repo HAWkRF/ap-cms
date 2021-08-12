@@ -1,6 +1,6 @@
 import ApiModel from '../ApiModel'
 
-class CategoriesGoogsModel extends ApiModel {
+class CategoriesGoodsModel extends ApiModel {
     getFilters(params) {
     return this.api.get(`${this.baseUrl}/filters`, params);
     }
@@ -12,4 +12,4 @@ class CategoriesGoogsModel extends ApiModel {
     }
 }
 
-export default new CategoriesGoogsModel('/categories');
+export default new CategoriesGoodsModel('/categories');

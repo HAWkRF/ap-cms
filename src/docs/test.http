@@ -15,6 +15,11 @@ Authorization: Bearer Ucg9LC6Ua08o0jf_mxjR_M4h0YdqdbX5
   "content": ""
 }
 
+###
+GET http://hmapi.detskie-sady.com/properties
+Accept: application/json;
+Content-Type: application/json
+Authorization: Bearer 9j7kZWYpjHrpLOaXUv8g1tV5bNom5JOi
 
 ###
 POST http://hmapi.detskie-sady.com/menu/item

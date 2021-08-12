@@ -22,6 +22,7 @@ import BannersTypes from '../views/BannersTypes'
 import OurWorks from '../views/OurWorks'
 import Menu from '../views/Menu'
 import MenuItem from '../views/MenuItem'
+import PropertiesGoods from '../views/PropertiesGoods'
 
 
 import SimpleHeader from '../layouts/SimpleHeader'
@@ -324,6 +325,23 @@ const router = new Router({
       },
       components: {
         default: MenuItem,
+        navbar: SimpleHeader,
+        footer: FooterSimple,
+        sidebar: Sidebar
+      },
+    },
+
+    {
+      path: '/properties',
+      name: 'properties-goods',
+      meta: {
+        requiresAuth: true,
+        onlyWorker: true,
+        title: i18n.t('main.meta.menuItem'), // поменять
+        layout: 'simple',
+      },
+      components: {
+        default: PropertiesGoods,
         navbar: SimpleHeader,
         footer: FooterSimple,
         sidebar: Sidebar
