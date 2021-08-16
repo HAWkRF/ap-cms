@@ -88,7 +88,6 @@ export default {
   data() {
     return {
       isCreate: null,
-      //apiUrl: Api.baseUrl + `/item-index/${this.$route.params.id}`,
       apiUrl: Api.baseUrl + `/item-index/${this.$route.params.id}`,
       baseUrl: process.env.VUE_APP_API,
       img_size: "?w=80&h=80",
@@ -126,11 +125,6 @@ export default {
     },
   },
   methods: {
-    async getMenuItems() {
-        //const responseFilter = await Api.getFilters(this.$route.params.id);
-        //const response = await Api.getItemId(this.$route.params.id);
-        
-    },
     searchRefresh() {
       this.$refs.searchForm.fetchFilters();
     },

@@ -3,18 +3,19 @@
     <div class="row-ap">
       <div class="col-12">
         <h1>{{ $t("propertiesGoods.page_title") }}</h1>
-          <div class="search-form">
-            <b-row>
-              <b-col order-lg="2" lg="auto">
-                <b-button
+        <div class="search-form">
+          <b-row>
+            <b-col order-lg="2" lg="auto">
+              <b-button
                 @click="openCreateModal"
                 v-text="$t('propertiesGoods.create')"
                 block
               >
-                </b-button>
-              </b-col>
+              </b-button>
+            </b-col>
             <b-col order-md="1" col>
-              <properties-goods-search ref="searchForm" @search="search"> </properties-goods-search>
+              <properties-goods-search ref="searchForm" @search="search">
+              </properties-goods-search>
             </b-col>
           </b-row>
         </div>
@@ -31,6 +32,15 @@
           </template>
           <template v-slot:count_canvas="{ row }">
             {{ row.count_canvas }}
+          </template>
+          <template v-slot:values="{ row }">
+            <v-client-table
+              ref="itemsTable"
+              :columns="tableColumnsItems"
+              :options="tableOptions"
+              :data="row.propertiesItems"
+            >
+            </v-client-table>
           </template>
           <template v-slot:actions="{ row }">
             <table-action-buttons
@@ -75,6 +85,7 @@ import Api from "@/api/v1/properties-goods";
 import PropertiesGoodsSearch from "@/components/properties-goods/PropertiesGoodsSearch";
 import PropertiesGoodsForm from "@/components/properties-goods/PropertiesGoodsForm";
 import TableActionButtons from "@/components/TableActionButtons";
+import ClientTable from "@/components/properties-goods/ClientTable";
 
 export default {
   name: "properties-goods",
@@ -86,20 +97,24 @@ export default {
   mixins: [notificationMixin, tableRefreshMixin, filtersMixin],
   data() {
     return {
-      apiUrl: Api.baseUrl,
+      items: [],
+      apiUrl: Api.baseUrl + `?expand=propertiesItems`,
       baseUrl: process.env.VUE_APP_API,
-      img_size: "?w=80&h=80",
       tableOptions: {
         perPage: 10,
         headings: {
           id: this.$t("propertiesGoods.table.id"),
           title: this.$t("propertiesGoods.table.title"),
-          status_title: this.$t("pages.table.status"),
           actions: "",
         },
-        sortable: ["id", "title", "status_title"],
+        sortable: ["id"],
         params: {},
+        columnsClasses: {
+          id: "properties-goods-id",
+          title: "properties-goods-title",
+        },
       },
+
       formModal: {
         id: null,
         show: false,
@@ -110,13 +125,14 @@ export default {
   computed: {
     tableColumns() {
       const actions = ["actions"];
-      return ["id", "title", "status_title", ...actions];
+      return ["id", "title", "values", ...actions];
+    },
+    tableColumnsItems() {
+      const actions = ["actions"];
+      return ["value", ...actions];
     },
   },
   methods: {
-    imgUrl(rowItem) {
-      return this.baseUrl + rowItem.prev_img.src + this.img_size;
-    },
     searchRefresh() {
       this.$refs.searchForm.fetchFilters();
     },

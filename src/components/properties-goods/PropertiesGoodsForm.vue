@@ -40,18 +40,19 @@
       </b-col>
     </b-form-row>
 
-
-    <!-- <b-form-row>
+    <b-form-row>
       <b-col md="6">
-        <b-form-group :label="$t('banners.labels.status')" label-for="statusInput">
+        <b-form-group :label="$t('propertiesGoods.labels.category')" label-for="categoryInput">
           <multiselect
-            id="statusInput"
-            v-model="statusIdSelect"
+            id="categoryInput"
+            v-model="categorySelect"
             track-by="id"
             label="title"
             :placeholder="$t('main.pickAValue')"
-            :options="statuses"
+            :options="categories"
             :searchable="false"
+            :multiple="true"
+            :taggable="true"
             :allow-empty="false"
             v-bind="selectOptions"
           >
@@ -60,14 +61,12 @@
             }}</template>
           </multiselect>
           <b-form-invalid-feedback
-            :style="{ display: !!form.errors.get('status') ? 'block' : 'none' }"
-            v-text="form.errors.get('status')"
+            :style="{ display: !!form.errors.get('category') ? 'block' : 'none' }"
+            v-text="form.errors.get('category')"
           ></b-form-invalid-feedback>
         </b-form-group>
       </b-col>
-    </b-form-row> -->
-
-
+    </b-form-row>
   </b-form>
 </template>
 
@@ -86,19 +85,18 @@ export default {
     Multiselect,
   },
   watch: {
-    statusIdSelect(value) {
+    categorySelect(value) {
       if (value !== undefined) {
-        this.form.status = value.id;
+        this.form.category.push(value);
       }
     },
   },
   data: function () {
     return {
       loading: false,
-      isSeoFieldsShown: false,
 
-      statuses: [],
-      statusIdSelect: null,
+      categories: [],
+      categorySelect: null,
 
       selectOptions: {
         multiple: false,
@@ -112,10 +110,10 @@ export default {
       form: new Form({
         sid: "",
         id: null,
+        category: [],
         title: "",
         unit: "",
         unit_alias: "",
-        status: 0,
         alias: "",
       }),
     };
@@ -126,11 +124,11 @@ export default {
       this.form.load(response.data);
       this.form.id = id;
 
-      //this.statusIdSelect = this.statuses.find((x) => x.id === this.form.status);
+      this.categorySelect = this.categories.find((x) => x.id === this.form.category);
     },
     async loadFilters() {
       const response = await Api.getFilters();
-      //this.statuses = response.data.statuses;
+      this.categories = response.data.categories;
     },
     async submit() {
       try {

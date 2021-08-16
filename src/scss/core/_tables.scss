@@ -2,34 +2,9 @@
 // Basic Bootstrap table
 //
 
-.groups {
-  .table {
-
-    .instructors,
-    .attendance,
-    .act {
-      @include media-breakpoint-down(xs) {
-        display: none;
-      }
-    }
-  }
-}
-
 .payments-report {
   .table {
     .ava {
-      @include media-breakpoint-down(sm) {
-        display: none;
-      }
-    }
-  }
-}
-
-.tickets-report {
-  .table {
-
-    .ava,
-    .user-info {
       @include media-breakpoint-down(sm) {
         display: none;
       }
@@ -91,6 +66,16 @@
 
   .mailing-title {
     width: 40%;
+  }
+
+  .properties-goods-id {
+    text-align: center;
+    vertical-align: top;
+  }
+
+  .properties-goods-title {
+    text-align: center;
+    vertical-align: top;
   }
 }
 

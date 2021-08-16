@@ -25,7 +25,7 @@
         <b-input-group>
           <b-form-input
             type="search"
-            v-model="search.title"
+            v-model="search.value"
             :placeholder="$t('propertiesGoods.search.value')"
           >
           </b-form-input>
@@ -76,6 +76,7 @@ export default {
         title: "",
         category: "",
         id: "",
+        value: ""
       },
       selectOptions: {
         multiple: false,
