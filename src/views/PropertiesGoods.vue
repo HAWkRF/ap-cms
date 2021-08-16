@@ -34,13 +34,8 @@
             {{ row.count_canvas }}
           </template>
           <template v-slot:values="{ row }">
-            <v-client-table
-              ref="itemsTable"
-              :columns="tableColumnsItems"
-              :options="tableOptions"
-              :data="row.propertiesItems"
-            >
-            </v-client-table>
+            <client-table :items="row.propertiesItems">
+            </client-table>
           </template>
           <template v-slot:actions="{ row }">
             <table-action-buttons
@@ -93,11 +88,11 @@ export default {
     PropertiesGoodsForm,
     PropertiesGoodsSearch,
     TableActionButtons,
+    ClientTable,
   },
   mixins: [notificationMixin, tableRefreshMixin, filtersMixin],
   data() {
     return {
-      items: [],
       apiUrl: Api.baseUrl + `?expand=propertiesItems`,
       baseUrl: process.env.VUE_APP_API,
       tableOptions: {
@@ -114,7 +109,6 @@ export default {
           title: "properties-goods-title",
         },
       },
-
       formModal: {
         id: null,
         show: false,
@@ -126,10 +120,6 @@ export default {
     tableColumns() {
       const actions = ["actions"];
       return ["id", "title", "values", ...actions];
-    },
-    tableColumnsItems() {
-      const actions = ["actions"];
-      return ["value", ...actions];
     },
   },
   methods: {

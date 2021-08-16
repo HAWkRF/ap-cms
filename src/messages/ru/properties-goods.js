@@ -21,6 +21,11 @@ export default {
       title: "Название",
       category: "Категория",
     },
+
+    items: {
+      create: "Добавить",
+      update: "Редактировать",
+    }
   };
   
   

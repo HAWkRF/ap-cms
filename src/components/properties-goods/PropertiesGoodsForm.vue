@@ -42,7 +42,10 @@
 
     <b-form-row>
       <b-col md="6">
-        <b-form-group :label="$t('propertiesGoods.labels.category')" label-for="categoryInput">
+        <b-form-group
+          :label="$t('propertiesGoods.labels.category')"
+          label-for="categoryInput"
+        >
           <multiselect
             id="categoryInput"
             v-model="categorySelect"
@@ -86,8 +89,12 @@ export default {
   },
   watch: {
     categorySelect(value) {
+      let val = this
       if (value !== undefined) {
-        this.form.category.push(value);
+       this.form.category_ids = [];
+        value.forEach(function(item) {
+          val.form.category_ids.push(item.id)
+        })
       }
     },
   },
@@ -110,7 +117,7 @@ export default {
       form: new Form({
         sid: "",
         id: null,
-        category: [],
+        category_ids: [],
         title: "",
         unit: "",
         unit_alias: "",
@@ -124,7 +131,7 @@ export default {
       this.form.load(response.data);
       this.form.id = id;
 
-      this.categorySelect = this.categories.find((x) => x.id === this.form.category);
+      this.categorySelect = this.categories.filter((x) => x.id === this.form.category_ids);
     },
     async loadFilters() {
       const response = await Api.getFilters();
