@@ -100,13 +100,13 @@ export default {
         headings: {
           id: this.$t("propertiesGoods.table.id"),
           title: this.$t("propertiesGoods.table.title"),
+          values: this.$t("propertiesGoods.table.values"),
           actions: "",
         },
         sortable: ["id"],
         params: {},
         columnsClasses: {
           id: "properties-goods-id",
-          title: "properties-goods-title",
         },
       },
       formModal: {

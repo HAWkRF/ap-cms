@@ -8,6 +8,7 @@ export default {
     table: {
         id: "id",
         title: "Название и единица измерения",
+        values: "Значения"
     },
   
     labels: {

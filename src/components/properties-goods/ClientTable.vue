@@ -7,6 +7,9 @@
       :data="items"
       @row-click="handleView"
     >
+      <template v-slot:values="{ row }">
+        {{ row.items.alias }}
+      </template>
       <template v-slot:actions="{ row }">
         <table-action-buttons
           :update-visible="true"
@@ -85,7 +88,6 @@ export default {
     },
     async saved() {
       this.formModal.show = false;
-      //this.searchRefresh();
       this.refreshTable();
     },
     refreshTable() {
